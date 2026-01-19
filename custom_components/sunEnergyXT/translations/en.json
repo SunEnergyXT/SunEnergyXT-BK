@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Device already configured",
+      "already_configured_device": "Device already configured",
+      "already_in_progress": "Configuration process already in progress",
+      "no_devices_found": "No devices found"
+    },
+    "error": {
+      "cannot_connect": "Connection failed",
+      "invalid_host": "Invalid IP address",
+      "timeout_connect": "Connection timeout",
+      "unknown": "Unknown error",
+      "no_devices_found": "No devices found",
+      "already_configured": "Device already configured"
+    },
+    "step": {
+      "user": {
+        "title": "Balcony Photovoltaic Configuration",
+        "data": {
+          "device_name": "Device Name",
+          "serial_number": "Device Serial Number"
+        },
+        "data_description": {
+          "device_name": "This name is used to distinguish between different devices",
+          "serial_number": "The serial number of the device to connect to"
+        }
+      },
+      "device_not_found": {
+        "title": "Balcony Photovoltaic Configuration",
+        "data": {
+          "manual_config": "Manual Configuration"
+        },
+        "data_description": {
+          "manual_config": "Manually configure parameters"
+        }
+      },
+      "manual": {
+        "title": "Balcony Photovoltaic Configuration",
+        "data": {
+          "device_name": "Device Name",
+          "serial_number": "Device Serial Number",
+          "host": "Device IP",
+          "port": "Device Port",
+          "sw_version": "Software Version",
+          "hw_version": "Hardware Version"
+        },
+        "data_description": {
+          "device_name": "This name is used to distinguish between different devices",
+          "serial_number": "The serial number of the device to connect to",
+          "host": "The IP address of the device for establishing a TCP connection",
+          "port": "The port of the device for establishing a TCP connection",
+          "sw_version": "The firmware version number of the device",
+          "hw_version": "The hardware version number of the device"
+        }
+      }
+    }
+  },
+  "options": {
+    "error": {
+      "cannot_connect": "Connection failed",
+      "invalid_host": "Invalid IP address",
+      "timeout_connect": "Connection timeout",
+      "serial_number_cannot_change": "Serial number cannot be changed",
+      "unknown": "Unknown error"
+    },
+    "step": {
+      "init": {
+        "title": "Balcony Photovoltaic Configuration",
+        "data": {
+          "device_name": "Device Name",
+          "serial_number": "Device Serial Number",
+          "host": "Device IP",
+          "port": "Device Port",
+          "sw_version": "Software Version",
+          "hw_version": "Hardware Version"
+        },
+        "data_description": {
+          "device_name": "This name is used to distinguish between different devices",
+          "serial_number": "The serial number of the device to connect to",
+          "host": "The IP address of the device for establishing a TCP connection",
+          "port": "The port of the device for establishing a TCP connection",
+          "sw_version": "The firmware version number of the device",
+          "hw_version": "The hardware version number of the device"
+        }
+      }
+    }
+  },
+  "selector": {
+    "manual_config_options": {
+      "options": {
+        "yes": "Yes",
+        "no": "No"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "wifi_soc": {
+        "name": "Battery level"
+      },
+      "wifi_b_actual_soc": {
+        "name": "Head storage"
+      },
+      "wifi_b1_actual_soc": {
+        "name": "Expansion storage 1"
+      },
+      "wifi_b2_actual_soc": {
+        "name": "Expansion storage 2"
+      },
+      "wifi_b3_actual_soc": {
+        "name": "Expansion storage 3"
+      },
+      "wifi_b4_actual_soc": {
+        "name": "Expansion storage 4"
+      },
+      "wifi_b5_actual_soc": {
+        "name": "Expansion storage 5"
+      },
+      "wifi_b6_actual_soc": {
+        "name": "Expansion storage 6"
+      },
+      "wifi_b7_actual_soc": {
+        "name": "Expansion storage 7"
+      },
+      "wifi_mbms_hw_limited_disc_soc_min": {
+        "name": "Head HW discharge limit"
+      },
+      "wifi_mbms_hw_limited_chg_soc_max": {
+        "name": "Head HW charge limit"
+      },
+      "wifi_sbms1_hw_limited_disc_soc_min": {
+        "name": "Expansion 1 HW discharge limit"
+      },
+      "wifi_sbms1_hw_limited_chg_soc_max": {
+        "name": "Expansion 1 HW charge limit"
+      },
+      "wifi_sbms2_hw_limited_disc_soc_min": {
+        "name": "Expansion 2 HW discharge limit"
+      },
+      "wifi_sbms2_hw_limited_chg_soc_max": {
+        "name": "Expansion 2 HW charge limit"
+      },
+      "wifi_sbms3_hw_limited_disc_soc_min": {
+        "name": "Expansion 3 HW discharge limit"
+      },
+      "wifi_sbms3_hw_limited_chg_soc_max": {
+        "name": "Expansion 3 HW charge limit"
+      },
+      "wifi_sbms4_hw_limited_disc_soc_min": {
+        "name": "Expansion 4 HW discharge limit"
+      },
+      "wifi_sbms4_hw_limited_chg_soc_max": {
+        "name": "Expansion 4 HW charge limit"
+      },
+      "wifi_sbms5_hw_limited_disc_soc_min": {
+        "name": "Expansion 5 HW discharge limit"
+      },
+      "wifi_sbms5_hw_limited_chg_soc_max": {
+        "name": "Expansion 5 HW charge limit"
+      },
+       "wifi_sbms6_hw_limited_disc_soc_min": {
+        "name": "Expansion 6 HW discharge limit"
+      },
+      "wifi_sbms6_hw_limited_chg_soc_max": {
+        "name": "Expansion 6 HW charge limit"
+      },
+       "wifi_sbms7_hw_limited_disc_soc_min": {
+        "name": "Expansion 7 HW discharge limit"
+      },
+      "wifi_sbms7_hw_limited_chg_soc_max": {
+        "name": "Expansion 7 HW charge limit"
+      },
+       "wifi_connection": {
+        "name": "Connection State",
+        "state": {
+          "connected": "Connected",
+          "disconnected": "Disconnected"
+        }
+      },
+       "wifi_update_time": {
+        "name": "Last Update Time"
+      }
+    },
+    "switch": {
+      "wifi_system_local_comm_enable": {
+        "name": "Local Mode"
+      },
+      "wifi_chg_mode_hm": {
+        "name": "Battery Charging Mode"
+      },
+      "wifi_car_chg_mode_hm": {
+        "name": "Car Charging Mode"
+      },
+      "wifi_home_mode_hm": {
+        "name": "Home Appliance Mode"
+      },
+      "wifi_cp_ev_ac_active_set": {
+        "name": "AC Active Mode"
+      }
+    },
+    "number": {
+      "wifi_cnfg_disc_soc_min": {
+        "name": "System Discharge Limit"
+      },
+      "wifi_cnfg_chg_soc_max": {
+        "name": "System Charge Limit"
+      },
+       "wifi_cp_ha_dod_min_soc": {
+        "name": "Discharge Cutoff SOC Setting (Home Appliance Mode)"
+      },
+       "wifi_cp_ev_dod_min_soc": {
+        "name": "Discharge Cutoff SOC Setting (Car Charging Mode)"
+      },
+       "wifi_cp_chg_dod_max_soc": {
+        "name": "Charge Cutoff SOC Setting (Battery Charging Mode)"
+      },
+       "wifi_sys_chg_set_power": {
+        "name": "System Charging Power"
+      },
+       "wifi_no_input_output_timeout": {
+        "name": "Idle Auto-Shutdown Time"
+      },
+       "wifi_into_dod_timeout": {
+        "name": "Low Battery Auto-Shutdown Time"
+      }
+    }
+  }
+}

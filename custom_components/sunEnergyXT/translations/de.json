@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Gerät bereits konfiguriert",
+      "already_configured_device": "Gerät bereits konfiguriert",
+      "already_in_progress": "Konfiguration läuft bereits",
+      "no_devices_found": "Keine Geräte gefunden"
+    },
+    "error": {
+      "cannot_connect": "Verbindung fehlgeschlagen",
+      "invalid_host": "Ungültige IP-Adresse",
+      "timeout_connect": "Verbindungszeitüberschreitung",
+      "unknown": "Unbekannter Fehler",
+      "no_devices_found": "Keine Geräte gefunden",
+      "already_configured": "Gerät bereits konfiguriert"
+    },
+    "step": {
+      "user": {
+        "title": "Balkon-PV-Konfiguration",
+        "data": {
+          "device_name": "Gerätename",
+          "serial_number": "Seriennummer"
+        },
+        "data_description": {
+          "device_name": "Dieser Name dient zur Unterscheidung der einzelnen Geräte",
+          "serial_number": "Seriennummer des zu verbindenden Geräts"
+        }
+      },
+      "device_not_found": {
+        "title": "Balkon-PV-Konfiguration",
+        "data": {
+          "manual_config": "Manuelle Konfiguration"
+        },
+        "data_description": {
+          "manual_config": "Parameter manuell konfigurieren"
+        }
+      },
+      "manual": {
+        "title": "Balkon-PV-Konfiguration",
+        "data": {
+          "device_name": "Gerätename",
+          "serial_number": "Seriennummer",
+          "host": "IP-Adresse",
+          "port": "Port",
+          "sw_version": "Softwareversion",
+          "hw_version": "Hardwareversion"
+        },
+        "data_description": {
+          "device_name": "Dieser Name dient zur Unterscheidung der einzelnen Geräte",
+          "serial_number": "Seriennummer des zu verbindenden Geräts",
+          "host": "IP-Adresse des Geräts für die TCP-Verbindung",
+          "port": "Port des Geräts für die TCP-Verbindung",
+          "sw_version": "Firmwareversion des Geräts",
+          "hw_version": "Hardwareversion des Geräts"
+        }
+      }
+    }
+  },
+  "options": {
+    "error": {
+      "cannot_connect": "Verbindung fehlgeschlagen",
+      "invalid_host": "Ungültige IP-Adresse",
+      "timeout_connect": "Verbindungszeitüberschreitung",
+      "serial_number_cannot_change": "Seriennummer kann nicht geändert werden",
+      "unknown": "Unbekannter Fehler"
+    },
+    "step": {
+      "init": {
+        "title": "Balkon-PV-Konfiguration",
+        "data": {
+          "device_name": "Gerätename",
+          "serial_number": "Seriennummer",
+          "host": "IP-Adresse",
+          "port": "Port",
+          "sw_version": "Softwareversion",
+          "hw_version": "Hardwareversion"
+        },
+        "data_description": {
+          "device_name": "Dieser Name dient zur Unterscheidung der einzelnen Geräte",
+          "serial_number": "Seriennummer des zu verbindenden Geräts",
+          "host": "IP-Adresse des Geräts für die TCP-Verbindung",
+          "port": "Port des Geräts für die TCP-Verbindung",
+          "sw_version": "Firmwareversion des Geräts",
+          "hw_version": "Hardwareversion des Geräts"
+        }
+      }
+    }
+  },
+  "selector": {
+    "manual_config_options": {
+      "options": {
+        "yes": "Ja",
+        "no": "Nein"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "wifi_soc": {
+        "name": "Speicherlevel"
+      },
+      "wifi_b_actual_soc": {
+        "name": "Kopfspeicher"
+      },
+      "wifi_b1_actual_soc": {
+        "name": "Erweiterungsspeicher 1"
+      },
+      "wifi_b2_actual_soc": {
+        "name": "Erweiterungsspeicher 2"
+      },
+      "wifi_b3_actual_soc": {
+        "name": "Erweiterungsspeicher 3"
+      },
+      "wifi_b4_actual_soc": {
+        "name": "Erweiterungsspeicher 4"
+      },
+      "wifi_b5_actual_soc": {
+        "name": "Erweiterungsspeicher 5"
+      },
+      "wifi_b6_actual_soc": {
+        "name": "Erweiterungsspeicher 6"
+      },
+      "wifi_b7_actual_soc": {
+        "name": "Erweiterungsspeicher 7"
+      },
+      "wifi_mbms_hw_limited_disc_soc_min": {
+        "name": "Kopf HW-Entladegrenze"
+      },
+      "wifi_mbms_hw_limited_chg_soc_max": {
+        "name": "Kopf HW-Ladegrenze"
+      },
+      "wifi_sbms1_hw_limited_disc_soc_min": {
+        "name": "Erweiterung 1 HW-Entladegrenze"
+      },
+      "wifi_sbms1_hw_limited_chg_soc_max": {
+        "name": "Erweiterung 1 HW-Ladegrenze"
+      },
+      "wifi_sbms2_hw_limited_disc_soc_min": {
+        "name": "Erweiterung 2 HW-Entladegrenze"
+      },
+      "wifi_sbms2_hw_limited_chg_soc_max": {
+        "name": "Erweiterung 2 HW-Ladegrenze"
+      },
+      "wifi_sbms3_hw_limited_disc_soc_min": {
+        "name": "Erweiterung 3 HW-Entladegrenze"
+      },
+      "wifi_sbms3_hw_limited_chg_soc_max": {
+        "name": "Erweiterung 3 HW-Ladegrenze"
+      },
+      "wifi_sbms4_hw_limited_disc_soc_min": {
+        "name": "Erweiterung 4 HW-Entladegrenze"
+      },
+      "wifi_sbms4_hw_limited_chg_soc_max": {
+        "name": "Erweiterung 4 HW-Ladegrenze"
+      },
+      "wifi_sbms5_hw_limited_disc_soc_min": {
+        "name": "Erweiterung 5 HW-Entladegrenze"
+      },
+      "wifi_sbms5_hw_limited_chg_soc_max": {
+        "name": "Erweiterung 5 HW-Ladegrenze"
+      },
+       "wifi_sbms6_hw_limited_disc_soc_min": {
+        "name": "Erweiterung 6 HW-Entladegrenze"
+      },
+      "wifi_sbms6_hw_limited_chg_soc_max": {
+        "name": "Erweiterung 6 HW-Ladegrenze"
+      },
+       "wifi_sbms7_hw_limited_disc_soc_min": {
+        "name": "Erweiterung 7 HW-Entladegrenze"
+      },
+      "wifi_sbms7_hw_limited_chg_soc_max": {
+        "name": "Erweiterung 7 HW-Ladegrenze"
+      },
+       "wifi_connection": {
+        "name": "Verbindungsstatus",
+        "state": {
+          "connected": "Verbunden",
+          "disconnected": "Getrennt"
+        }
+      },
+       "wifi_update_time": {
+        "name": "Letzte Aktualisierung"
+      }
+    },
+    "switch": {
+      "wifi_system_local_comm_enable": {
+        "name": "Lokaler modus"
+      },
+      "wifi_chg_mode_hm": {
+        "name": "Speicherlade-Modus"
+      },
+      "wifi_car_chg_mode_hm": {
+        "name": "Autolade-Modus"
+      },
+      "wifi_home_mode_hm": {
+        "name": "Haushaltsgeräte-Modus"
+      },
+      "wifi_cp_ev_ac_active_set": {
+        "name": "EV AC-Aktivmodus"
+      }
+    },
+    "number": {
+      "wifi_cnfg_disc_soc_min": {
+        "name": "System Entladegrenze"
+      },
+      "wifi_cnfg_chg_soc_max": {
+        "name": "System Ladegrenze"
+      },
+       "wifi_cp_ha_dod_min_soc": {
+        "name": "Entlade-Abschaltgrenze im Haushaltsgeräte-Modus"
+      },
+       "wifi_cp_ev_dod_min_soc": {
+        "name": "Entlade-Abschaltgrenze im Autolade-Modus"
+      },
+       "wifi_cp_chg_dod_max_soc": {
+        "name": "Lade-Abschaltgrenze im Speicherlade-Modus"
+      },
+       "wifi_sys_chg_set_power": {
+        "name": "System Ladeleistung"
+      },
+       "wifi_no_input_output_timeout": {
+        "name": "Leerlauf Abschaltzeit"
+      },
+       "wifi_into_dod_timeout": {
+        "name": "Niedrigstand Abschaltzeit"
+      }
+    }
+  }
+}

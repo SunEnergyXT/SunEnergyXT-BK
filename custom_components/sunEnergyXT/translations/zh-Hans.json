@@ -1,0 +1,229 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "设备已配置",
+      "already_configured_device": "设备已配置",
+      "already_in_progress": "配置流程已在进行中",
+      "no_devices_found": "未发现设备"
+    },
+    "error": {
+      "cannot_connect": "连接失败",
+      "invalid_host": "无效的IP地址",
+      "timeout_connect": "连接超时",
+      "unknown": "未知错误",
+      "no_devices_found": "未发现设备",
+      "already_configured": "设备已配置"
+    },
+    "step": {
+      "user": {
+        "title": "阳台光伏配置",
+        "data": {
+          "device_name": "设备名称",
+          "serial_number": "设备序列号"
+        },
+        "data_description": {
+          "device_name": "此名称用于区分不同设备",
+          "serial_number": "要连接的设备的序列号"
+        }
+      },
+      "device_not_found": {
+        "title": "阳台光伏配置",
+        "data": {
+          "manual_config": "手动配置"
+        },
+        "data_description": {
+          "manual_config": "手动进行参数配置"
+        }
+      },
+      "manual": {
+        "title": "阳台光伏配置",
+        "data": {
+          "device_name": "设备名称",
+          "serial_number": "设备序列号",
+          "host": "设备IP",
+          "port": "设备端口",
+          "sw_version": "软件版本号",
+          "hw_version": "硬件版本号"
+        },
+        "data_description": {
+          "device_name": "此名称用于区分不同设备",
+          "serial_number": "要连接的设备的序列号",
+          "host": "需要进行TCP连接的设备IP地址",
+          "port": "需要进行TCP连接的设备端口",
+          "sw_version": "设备的固件版本号",
+          "hw_version": "设备的硬件版本号"
+        }
+      }
+    }
+  },
+  "options": {
+    "error": {
+      "cannot_connect": "连接失败",
+      "invalid_host": "无效的IP地址",
+      "timeout_connect": "连接超时",
+      "serial_number_cannot_change": "序列号不能更改",
+      "unknown": "未知错误"
+    },
+    "step": {
+      "init": {
+        "title": "阳台光伏配置",
+        "data": {
+          "device_name": "设备名称",
+          "serial_number": "设备序列号",
+          "host": "设备IP",
+          "port": "设备端口",
+          "sw_version": "软件版本号",
+          "hw_version": "硬件版本号"
+        },
+        "data_description": {
+          "device_name": "此名称用于区分不同设备",
+          "serial_number": "要连接的设备的序列号",
+          "host": "需要进行TCP连接的设备IP地址",
+          "port": "需要进行TCP连接的设备端口",
+          "sw_version": "设备的固件版本号",
+          "hw_version": "设备的硬件版本号"
+        }
+      }
+    }
+  },
+  "selector": {
+    "manual_config_options": {
+      "options": {
+        "yes": "是",
+        "no": "否"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "wifi_soc": {
+        "name": "系统总剩余电量"
+      },
+      "wifi_b_actual_soc": {
+        "name": "主机剩余电量"
+      },
+      "wifi_b1_actual_soc": {
+        "name": "从机1剩余电量"
+      },
+      "wifi_b2_actual_soc": {
+        "name": "从机2剩余电量"
+      },
+      "wifi_b3_actual_soc": {
+        "name": "从机3剩余电量"
+      },
+      "wifi_b4_actual_soc": {
+        "name": "从机4剩余电量"
+      },
+      "wifi_b5_actual_soc": {
+        "name": "从机5剩余电量"
+      },
+      "wifi_b6_actual_soc": {
+        "name": "从机6剩余电量"
+      },
+      "wifi_b7_actual_soc": {
+        "name": "从机7剩余电量"
+      },
+      "wifi_mbms_hw_limited_disc_soc_min": {
+        "name": "主机硬件放电下限"
+      },
+      "wifi_mbms_hw_limited_chg_soc_max": {
+        "name": "主机硬件充电上限"
+      },
+      "wifi_sbms1_hw_limited_disc_soc_min": {
+        "name": "从机1硬件放电下限"
+      },
+      "wifi_sbms1_hw_limited_chg_soc_max": {
+        "name": "从机1硬件充电上限"
+      },
+      "wifi_sbms2_hw_limited_disc_soc_min": {
+        "name": "从机2硬件放电下限"
+      },
+      "wifi_sbms2_hw_limited_chg_soc_max": {
+        "name": "从机2硬件充电上限"
+      },
+      "wifi_sbms3_hw_limited_disc_soc_min": {
+        "name": "从机3硬件放电下限"
+      },
+      "wifi_sbms3_hw_limited_chg_soc_max": {
+        "name": "从机3硬件充电上限"
+      },
+      "wifi_sbms4_hw_limited_disc_soc_min": {
+        "name": "从机4硬件放电下限"
+      },
+      "wifi_sbms4_hw_limited_chg_soc_max": {
+        "name": "从机4硬件充电上限"
+      },
+      "wifi_sbms5_hw_limited_disc_soc_min": {
+        "name": "从机5硬件放电下限"
+      },
+      "wifi_sbms5_hw_limited_chg_soc_max": {
+        "name": "从机5硬件充电上限"
+      },
+       "wifi_sbms6_hw_limited_disc_soc_min": {
+        "name": "从机6硬件放电下限"
+      },
+      "wifi_sbms6_hw_limited_chg_soc_max": {
+        "name": "从机6硬件充电上限"
+      },
+       "wifi_sbms7_hw_limited_disc_soc_min": {
+        "name": "从机7硬件放电下限"
+      },
+      "wifi_sbms7_hw_limited_chg_soc_max": {
+        "name": "从机7硬件充电上限"
+      },
+       "wifi_connection": {
+        "name": "网络连接状态",
+        "state": {
+          "connected": "连接",
+          "disconnected": "未连接"
+        }
+      },
+       "wifi_update_time": {
+        "name": "数据更新时间"
+      }
+    },
+    "switch": {
+      "wifi_system_local_comm_enable": {
+        "name": "本地通信模式"
+      },
+      "wifi_chg_mode_hm": {
+        "name": "常规充电模式"
+      },
+      "wifi_car_chg_mode_hm": {
+        "name": "车充模式"
+      },
+      "wifi_home_mode_hm": {
+        "name": "家电供电模式"
+      },
+      "wifi_cp_ev_ac_active_set": {
+        "name": "车充模式下允许混合切换市电供电"
+      }
+    },
+    "number": {
+      "wifi_cnfg_disc_soc_min": {
+        "name": "系统放电下限"
+      },
+      "wifi_cnfg_chg_soc_max": {
+        "name": "系统充电上限"
+      },
+       "wifi_cp_ha_dod_min_soc": {
+        "name": "车充盒家电模式下的放电截止电量设置"
+      },
+       "wifi_cp_ev_dod_min_soc": {
+        "name": "车充盒车充模式下的放电截止SOC设置"
+      },
+       "wifi_cp_chg_dod_max_soc": {
+        "name": "车充盒充电模式下的充电截止SOC设置"
+      },
+       "wifi_sys_chg_set_power": {
+        "name": "系统充电功率"
+      },
+       "wifi_no_input_output_timeout": {
+        "name": "闲置自动关机时间"
+      },
+       "wifi_into_dod_timeout": {
+        "name": "低电量自动关机时间"
+      }
+    }
+  }
+}
