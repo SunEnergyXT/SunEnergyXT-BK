@@ -5,11 +5,11 @@
   "config_flow": true,
   "integration_type": "device",
   "iot_class": "local_polling",
-  "documentation": "",
+  "documentation": "https://www.sunenergyxt.com/entdecken/steuerung/home-assistant/how-to-integrate-your-BK215-BK215Plus-with-home-assistant",
   "issue_tracker": "",
   "quality_scale": "custom",
   "dependencies": ["network", "dhcp","zeroconf"],
   "requirements": ["propcache", "aiofiles", "pyyaml"],
   "translations": ["translations"],
-  "version": "26.01.19"
+  "version": "26.01.20"
 }
