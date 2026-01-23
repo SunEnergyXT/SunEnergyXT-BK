@@ -50,9 +50,30 @@ class SocSensor(SensorEntity):
         # self._attr_name = sensor_name
         self._state = 0
         self._attributes = {}
-        self._attr_device_class = SensorDeviceClass.BATTERY
+
+        SOC_IDS = (
+            WIFI_SOC,
+            WIFI_B_ACTUAL_SOC,
+            WIFI_B1_ACTUAL_SOC,
+            WIFI_B2_ACTUAL_SOC,
+            WIFI_B3_ACTUAL_SOC,
+            WIFI_B4_ACTUAL_SOC,
+            WIFI_B5_ACTUAL_SOC,
+            WIFI_B6_ACTUAL_SOC,
+            WIFI_B7_ACTUAL_SOC,
+        )
+
+        is_soc = sensor_id in SOC_IDS
+
+        # Nur echte SoC-Sensoren als Batterie klassifizieren.
+        self._attr_device_class = SensorDeviceClass.BATTERY if is_soc else None
+
+        # Einheit bleibt Prozent für alle
         self._attr_native_unit_of_measurement = PERCENTAGE  # 单位设置为百分比
-        self._attr_state_class = "measurement"  # 状态类型为测量值
+
+        # State-Class nur für echte Messwerte (SoC), nicht für HW-Limits
+        self._attr_state_class = "measurement" if is_soc else None
+
         self._attr_available = False
         self._attr_has_entity_name = True
         self.translation_key = sensor_id
@@ -108,10 +129,7 @@ class SocSensor(SensorEntity):
                 "%Y-%m-%d %H:%M:%S"
             )
 
-            if update_data <= 0:
-                self._attr_available = False
-            else:
-                self._attr_available = True
+            self._attr_available = True
 
             self.async_write_ha_state()  # 通知HA更新状态
 
