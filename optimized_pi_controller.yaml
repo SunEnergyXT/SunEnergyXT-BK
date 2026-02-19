@@ -1,0 +1,324 @@
+alias: Optimized PI (2-Mode Grid Zero Controller)
+description: >
+  Two-mode PI controller for grid power balancing (Grid -> 0W).
+  FAST mode reacts strongly to large deviations.
+  SLOW mode uses filtering near zero for stability.
+  Includes anti-windup, slew-rate limiting, SoC low-battery clamp.
+  Deadband blocks output updates but integral term still updates.
+
+mode: single
+max_exceeded: silent
+
+trigger:
+  - platform: state
+    entity_id: sensor.shellypro3em_fcb46703bc0c_power
+
+action:
+  #################################################################
+  # Read Sensors
+  #################################################################
+  - variables:
+      avg_soc: "{{ states(avg_soc_sensor) | float(0) }}"
+      p_grid_raw: "{{ states(grid_sensor) | float(0) }}"
+      limit_a: "{{ states(limit_a_ent) | float(0) }}"
+      limit_b: "{{ states(limit_b_ent) | float(0) }}"
+      real_min_soc: "{{ [limit_a, limit_b] | max }}"
+      curr_timeout_no_io: "{{ states(timeout_no_io) | float(0) }}"
+      curr_timeout_dod: "{{ states(timeout_dod) | float(0) }}"
+
+  #################################################################
+  # Optional: SoC-based shutdown timeout extension
+  #################################################################
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ avg_soc > c_soc_threshold }}"
+        sequence:
+          - if:
+              - condition: template
+                value_template: "{{ curr_timeout_no_io == c_timeout_def_no_io }}"
+            then:
+              - service: number.set_value
+                target:
+                  entity_id: "{{ timeout_no_io }}"
+                data:
+                  value: "{{ c_timeout_long }}"
+          - if:
+              - condition: template
+                value_template: "{{ curr_timeout_dod == c_timeout_def_dod }}"
+            then:
+              - service: number.set_value
+                target:
+                  entity_id: "{{ timeout_dod }}"
+                data:
+                  value: "{{ c_timeout_long }}"
+
+      - conditions:
+          - condition: template
+            value_template: "{{ avg_soc <= c_soc_threshold }}"
+        sequence:
+          - if:
+              - condition: template
+                value_template: "{{ curr_timeout_no_io != c_timeout_def_no_io }}"
+            then:
+              - service: number.set_value
+                target:
+                  entity_id: "{{ timeout_no_io }}"
+                data:
+                  value: "{{ c_timeout_def_no_io }}"
+          - if:
+              - condition: template
+                value_template: "{{ curr_timeout_dod != c_timeout_def_dod }}"
+            then:
+              - service: number.set_value
+                target:
+                  entity_id: "{{ timeout_dod }}"
+                data:
+                  value: "{{ c_timeout_def_dod }}"
+
+  #################################################################
+  # Low battery protection (force output 0 + reset integral)
+  #################################################################
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ avg_soc <= (real_min_soc + c_buffer_soc) }}"
+        sequence:
+          - service: number.set_value
+            target:
+              entity_id: "{{ inv1_ent }}"
+            data:
+              value: 0
+
+          - if:
+              - condition: template
+                value_template: "{{ inv2_exists }}"
+            then:
+              - service: number.set_value
+                target:
+                  entity_id: "{{ inv2_ent }}"
+                data:
+                  value: 0
+
+          - service: input_number.set_value
+            target:
+              entity_id: "{{ integral_entity }}"
+            data:
+              value: 0
+
+          - stop: >-
+              Low battery protection activated (SoC <= Limit+Buffer). Output forced to 0.
+
+  #################################################################
+  # Deadband flag (DO NOT stop; only block output changes later)
+  #################################################################
+  - variables:
+      in_deadband: "{{ p_grid_raw > c_deadband_min and p_grid_raw < c_deadband_max }}"
+
+  #################################################################
+  # dt based on automation trigger cadence
+  #################################################################
+  - variables:
+      last_ts: >
+        {{ as_timestamp(this.attributes.last_triggered)
+           if this.attributes.last_triggered else 0 }}
+      current_ts: "{{ now().timestamp() }}"
+      raw_diff: >
+        {% if last_ts == 0 %} 999
+        {% else %} {{ current_ts - last_ts }}
+        {% endif %}
+      dt: >
+        {% if raw_diff > c_dt_clamp_threshold %}
+          {{ c_dt_default }}
+        {% else %}
+          {{ raw_diff | round(3) }}
+        {% endif %}
+
+  #################################################################
+  # Two-mode selection + filtering
+  #################################################################
+  - variables:
+      use_fast: "{{ (p_grid_raw | abs) > c_fast_err_w }}"
+      alpha: "{{ c_alpha_fast if use_fast else c_alpha_slow }}"
+      prev_filt: "{{ states(grid_filt_entity) | float(p_grid_raw) }}"
+      p_grid_filt: "{{ (alpha * p_grid_raw + (1 - alpha) * prev_filt) | round(2) }}"
+      p_grid: "{{ p_grid_raw if use_fast else p_grid_filt }}"
+      kp_use: "{{ kp_fast if use_fast else kp_slow }}"
+      ki_use: "{{ ki_fast if use_fast else ki_slow }}"
+      max_step: "{{ c_max_step_pct_fast if use_fast else c_max_step_pct_slow }}"
+
+  - service: input_number.set_value
+    target:
+      entity_id: "{{ grid_filt_entity }}"
+    data:
+      value: "{{ p_grid_filt }}"
+
+  #################################################################
+  # PI controller + anti-windup + slew limit
+  #################################################################
+  - variables:
+      error: "{{ - (p_grid - c_import_bias_w) }}"
+
+      last_integral: "{{ states(integral_entity) | float(0) }}"
+      last_percent: "{{ states(inv1_ent) | float(0) }}"
+      integ_limit: "{{ p_sum * c_integral_limit_pct }}"
+      current_p: "{{ (last_percent / 100) * p_sum }}"
+
+      p_term: "{{ kp_use * error }}"
+      raw_new_integ: "{{ last_integral + (ki_use * error * dt) }}"
+
+      new_integral_candidate: >
+        {% if raw_new_integ > integ_limit %} {{ integ_limit }}
+        {% elif raw_new_integ < -integ_limit %} {{ -integ_limit }}
+        {% else %} {{ raw_new_integ }}
+        {% endif %}
+
+      p_offset_candidate: "{{ p_term + new_integral_candidate }}"
+      raw_target_p: "{{ current_p - p_offset_candidate }}"
+
+      saturated_high: "{{ raw_target_p > p_sum }}"
+      saturated_low: "{{ raw_target_p < 0 }}"
+      allow_integrate: >
+        {{ not ( (saturated_high and error > 0) or (saturated_low and error < 0) ) }}
+
+      new_integral: "{{ new_integral_candidate if allow_integrate else last_integral }}"
+
+      p_offset: "{{ p_term + new_integral }}"
+      raw_target_p2: "{{ current_p - p_offset }}"
+      target_p2: >
+        {% if raw_target_p2 > p_sum %} {{ p_sum }}
+        {% elif raw_target_p2 < 0 %} 0
+        {% else %} {{ raw_target_p2 }}
+        {% endif %}
+
+      new_percent_raw: "{{ (target_p2 / p_sum * 100) }}"
+      diff_pct: "{{ new_percent_raw - last_percent }}"
+
+      limited_diff_pct: >
+        {% if diff_pct > max_step %} {{ max_step }}
+        {% elif diff_pct < -max_step %} {{ -max_step }}
+        {% else %} {{ diff_pct }}
+        {% endif %}
+
+      new_percent: "{{ (last_percent + limited_diff_pct) | round(2) }}"
+
+  # Persist integral every run (even inside deadband)
+  - service: input_number.set_value
+    target:
+      entity_id: "{{ integral_entity }}"
+    data:
+      value: "{{ new_integral | round(3) }}"
+
+  #################################################################
+  # Apply Output (blocked inside deadband)
+  #################################################################
+  - if:
+      - condition: template
+        value_template: "{{ (not in_deadband) and ((new_percent - last_percent) | abs > c_output_hysteresis) }}"
+    then:
+      - service: number.set_value
+        target:
+          entity_id: "{{ inv1_ent }}"
+        data:
+          value: "{{ new_percent }}"
+
+      - if:
+          - condition: template
+            value_template: "{{ inv2_exists }}"
+        then:
+          - service: number.set_value
+            target:
+              entity_id: "{{ inv2_ent }}"
+            data:
+              value: "{{ new_percent }}"
+
+      - service: system_log.write
+        data:
+          level: info
+          message: >-
+            PI(2-mode): mode={{ "FAST" if use_fast else "SLOW" }},
+            Deadband={{ in_deadband }},
+            GridRaw={{ p_grid_raw }}W, GridUsed={{ p_grid }}W, dt={{ dt }}s,
+            Err={{ error }}, Kp={{ kp_use }}, Ki={{ ki_use }},
+            I={{ new_integral | round(2) }},
+            Out={{ last_percent }}% -> {{ new_percent }}% (step={{ limited_diff_pct | round(2) }}%)
+
+#################################################################
+# Configuration / Tuning (edit these!)
+#################################################################
+variables:
+  # --- REQUIRED ENTITY IDS ---
+  grid_sensor: sensor.shellypro3em_fcb46703bc0c_power
+  avg_soc_sensor: sensor.dcbdccbfe285_battery_level
+
+  # Helpers you must create:
+  # - input_number.pi_cumulative_points
+  # - input_number.pi_grid_filtered
+  integral_entity: input_number.pi_cumulative_points
+  grid_filt_entity: input_number.pi_grid_filtered
+
+  # Battery system parameters / protection
+  timeout_no_io: number.dcbdccbfe285_idle_auto_shutdown_time
+  timeout_dod: number.dcbdccbfe285_low_battery_auto_shutdown_time
+  limit_a_ent: number.dcbdccbfe285_system_discharge_limit
+  limit_b_ent: sensor.dcbdccbfe285_head_hw_discharge_limit
+
+  # Inverter output control (% limit entity)
+  inv1_ent: number.inverter_active_power_regulation
+  inv1_pow: 2000
+
+  # Optional second inverter (set inv2_ent to [] to disable)
+  inv2_ent: []
+  inv2_pow: 0
+  inv2_exists: >
+    {{ inv2_ent != [] and inv2_ent != None and inv2_pow > 0 }}
+
+  # Total available power (W)
+  p_sum: >
+    {{ inv1_pow + (inv2_pow if inv2_exists else 0) }}
+
+  # --- SOC / SHUTDOWN SETTINGS ---
+  c_soc_threshold: 10
+  c_timeout_long: 1440
+  c_timeout_def_no_io: 15
+  c_timeout_def_dod: 5
+
+  # Low-battery buffer (%) above discharge limit
+  c_buffer_soc: 3
+
+  # --- DEAD-BAND (W) ---
+  c_deadband_min: -20
+  c_deadband_max: 20
+
+  # --- TIME STEP CLAMP ---
+  c_dt_clamp_threshold: 60
+  c_dt_default: 5
+
+  # --- INTEGRAL LIMITING ---
+  c_integral_limit_pct: 0.15
+
+  # --- OUTPUT UPDATE HYSTERESIS (%points) ---
+  c_output_hysteresis: 0.05
+
+  # --- MODE SWITCH THRESHOLD (W) ---
+  c_fast_err_w: 120
+
+  # --- SETPOINT BIAS (W) ---
+  # 0 = aim for 0W grid
+  # +10 = prefer slight import
+  # -10 = prefer slight export
+  c_import_bias_w: 0
+
+  # --- FILTERING ---
+  c_alpha_slow: 0.35
+  c_alpha_fast: 1.0
+
+  # --- GAINS (TUNING) ---
+  kp_slow: 0.30
+  ki_slow: 0.01
+  kp_fast: 0.90
+  ki_fast: 0.02
+
+  # --- SLEW LIMITS (%points per update) ---
+  c_max_step_pct_slow: 0.6
+  c_max_step_pct_fast: 6
