@@ -97,31 +97,31 @@
   "entity": {
     "sensor": {
       "wifi_soc": {
-        "name": "Speicherlevel"
+        "name": "BK Speicherlevel"
       },
       "wifi_b_actual_soc": {
         "name": "Kopfspeicher"
       },
       "wifi_b1_actual_soc": {
-        "name": "Erweiterungsspeicher 1"
+        "name": "Erweiterung 1 Speicher"
       },
       "wifi_b2_actual_soc": {
-        "name": "Erweiterungsspeicher 2"
+        "name": "Erweiterung 2 Speicher"
       },
       "wifi_b3_actual_soc": {
-        "name": "Erweiterungsspeicher 3"
+        "name": "Erweiterung 3 Speicher"
       },
       "wifi_b4_actual_soc": {
-        "name": "Erweiterungsspeicher 4"
+        "name": "Erweiterung 4 Speicher"
       },
       "wifi_b5_actual_soc": {
-        "name": "Erweiterungsspeicher 5"
+        "name": "Erweiterung 5 Speicher"
       },
       "wifi_b6_actual_soc": {
-        "name": "Erweiterungsspeicher 6"
+        "name": "Erweiterung 6 Speicher"
       },
       "wifi_b7_actual_soc": {
-        "name": "Erweiterungsspeicher 7"
+        "name": "Erweiterung 7 Speicher"
       },
       "wifi_mbms_hw_limited_disc_soc_min": {
         "name": "Kopf HW-Entladegrenze"
@@ -171,58 +171,246 @@
       "wifi_sbms7_hw_limited_chg_soc_max": {
         "name": "Erweiterung 7 HW-Ladegrenze"
       },
-       "wifi_connection": {
+      "wifi_inputpower_total": {
+        "name": "BK Gesamte Eingangsleistung"
+      },
+      "wifi_outputpower_total": {
+        "name": "BK Gesamte Ausgangsleistung"
+      },
+      "wifi_eepc_day": {
+        "name": "BK Tagesertrag"
+      },
+      "wifi_outputenergy_day": {
+        "name": "BK Täglicher Energieaustrag"
+      },
+      "wifi_cp_ac_chg_energy_day": {
+        "name": "EV3600 Tägliche Netzladung"
+      },
+      "wifi_cp_ac_inputpower": {
+        "name": "EV3600 Netzeingangsleistung"
+      },
+      "wifi_car_chg_mode_power": {
+        "name": "EV3600 Fahrzeugladeleistung"
+      },
+      "wifi_home_mode_power": {
+        "name": "EV3600 Hauslastleistung"
+      },
+      "wifi_inputpower_pv1": {
+        "name": "Kopf PV1 Leistung"
+      },
+      "wifi_inputpower_pv2": {
+        "name": "Kopf PV2 Leistung"
+      },
+      "wifi_inputpower_pv3": {
+        "name": "Erweiterung 1 MPPT Leistung"
+      },
+      "wifi_inputpower_pv4": {
+        "name": "Erweiterung 2 MPPT Leistung"
+      },
+      "wifi_inputpower_pv5": {
+        "name": "Erweiterung 3 MPPT Leistung"
+      },
+      "wifi_inputpower_pv6": {
+        "name": "Erweiterung 4 MPPT Leistung"
+      },
+      "wifi_inputpower_pv7": {
+        "name": "Erweiterung 5 MPPT Leistung"
+      },
+      "wifi_inputpower_pv8": {
+        "name": "Erweiterung 6 MPPT Leistung"
+      },
+      "wifi_inputpower_pv9": {
+        "name": "Erweiterung 7 MPPT Leistung"
+      },
+      "wifi_b_celltemp": {
+        "name": "Kopf Batterietemperatur"
+      },
+      "wifi_b1_celltemp": {
+        "name": "Erweiterung 1 Batterietemperatur"
+      },
+      "wifi_b2_celltemp": {
+        "name": "Erweiterung 2 Batterietemperatur"
+      },
+      "wifi_b3_celltemp": {
+        "name": "Erweiterung 3 Batterietemperatur"
+      },
+      "wifi_b4_celltemp": {
+        "name": "Erweiterung 4 Batterietemperatur"
+      },
+      "wifi_b5_celltemp": {
+        "name": "Erweiterung 5 Batterietemperatur"
+      },
+      "wifi_b6_celltemp": {
+        "name": "Erweiterung 6 Batterietemperatur"
+      },
+      "wifi_b7_celltemp": {
+        "name": "Erweiterung 7 Batterietemperatur"
+      },
+      "wifi_b_heater_working_status": {
+        "name": "Kopf Heizungsstatus",
+          "state": {
+            "on": "Einschalten",
+            "off": "Ausschalten"
+        }
+      },
+      "wifi_b1_heater_working_status": {
+        "name": "Erweiterung 1 Heizungsstatus",
+        "state": {
+          "on": "Einschalten",
+          "off": "Ausschalten"
+        }
+      },
+      "wifi_b2_heater_working_status": {
+        "name": "Erweiterung 2 Heizungsstatus",
+        "state": {
+          "on": "Einschalten",
+          "off": "Ausschalten"
+        }
+      },
+      "wifi_b3_heater_working_status": {
+        "name": "Erweiterung 3 Heizungsstatus",
+        "state": {
+          "on": "Einschalten",
+          "off": "Ausschalten"
+        }
+      },
+      "wifi_b4_heater_working_status": {
+        "name": "Erweiterung 4 Heizungsstatus",
+        "state": {
+          "on": "Einschalten",
+          "off": "Ausschalten"
+        }
+      },
+      "wifi_b5_heater_working_status": {
+        "name": "Erweiterung 5 Heizungsstatus",
+        "state": {
+          "on": "Einschalten",
+          "off": "Ausschalten"
+        }
+      },
+      "wifi_b6_heater_working_status": {
+        "name": "Erweiterung 6 Heizungsstatus",
+        "state": {
+          "on": "Einschalten",
+          "off": "Ausschalten"
+        }
+      },
+      "wifi_b7_heater_working_status": {
+        "name": "Erweiterung 7 Heizungsstatus",
+        "state": {
+          "on": "Einschalten",
+          "off": "Ausschalten"
+        }
+      },
+      "wifi_mbms_mppt1_in_i": {
+        "name": "Kopf MPPT1 Strom"
+      },
+      "wifi_mbms_mppt1_in_v": {
+        "name": "Kopf MPPT1 Spannung"
+      },
+      "wifi_mbms_mppt2_in_i": {
+        "name": "Kopf MPPT2 Strom"
+      },
+      "wifi_mbms_mppt2_in_v": {
+        "name": "Kopf MPPT2 Spannung"
+      },
+      "wifi_sbms1_mppt_in_i": {
+        "name": "Erweiterung 1 MPPT Strom"
+      },
+      "wifi_sbms1_mppt_in_v": {
+        "name": "Erweiterung 1 MPPT Spannung"
+      },
+      "wifi_sbms2_mppt_in_i": {
+        "name": "Erweiterung 2 MPPT Strom"
+      },
+      "wifi_sbms2_mppt_in_v": {
+        "name": "Erweiterung 2 MPPT Spannung"
+      },
+      "wifi_sbms3_mppt_in_i": {
+        "name": "Erweiterung 3 MPPT Strom"
+      },
+      "wifi_sbms3_mppt_in_v": {
+        "name": "Erweiterung 3 MPPT Spannung"
+      },
+       "wifi_sbms4_mppt_in_i": {
+        "name": "Erweiterung 4 MPPT Strom"
+      },
+       "wifi_sbms4_mppt_in_v": {
+        "name": "Erweiterung 4 MPPT Spannung"
+      },
+       "wifi_sbms5_mppt_in_i": {
+        "name": "Erweiterung 5 MPPT Strom"
+      },
+       "wifi_sbms5_mppt_in_v": {
+        "name": "Erweiterung 5 MPPT Spannung"
+      },
+       "wifi_sbms6_mppt_in_i": {
+        "name": "Erweiterung 6 MPPT Strom"
+      },
+       "wifi_sbms6_mppt_in_v": {
+        "name": "Erweiterung 6 MPPT Spannung"
+      },
+       "wifi_sbms7_mppt_in_i": {
+        "name": "Erweiterung 7 MPPT Strom"
+      },
+       "wifi_sbms7_mppt_in_v": {
+        "name": "Erweiterung 7 MPPT Spannung"
+      },
+      "wifi_connection": {
         "name": "Verbindungsstatus",
         "state": {
           "connected": "Verbunden",
           "disconnected": "Getrennt"
         }
       },
-       "wifi_update_time": {
+      "wifi_wireless_network_rssi": {
+        "name": "WLAN-Signalstärke"
+      },
+      "wifi_update_time": {
         "name": "Letzte Aktualisierung"
       }
     },
     "switch": {
       "wifi_system_local_comm_enable": {
-        "name": "Lokaler modus"
+        "name": "BK Lokaler Modus"
       },
       "wifi_chg_mode_hm": {
-        "name": "Speicherlade-Modus"
+        "name": "EV3600 Speicherlade-Modus"
       },
       "wifi_car_chg_mode_hm": {
-        "name": "Autolade-Modus"
+        "name": "EV3600 Autolade-Modus"
       },
       "wifi_home_mode_hm": {
-        "name": "Haushaltsgeräte-Modus"
+        "name": "EV3600 Haushaltsgeräte-Modus"
       },
       "wifi_cp_ev_ac_active_set": {
-        "name": "EV AC-Aktivmodus"
+        "name": "EV3600 AC-Aktivmodus"
       }
     },
     "number": {
       "wifi_cnfg_disc_soc_min": {
-        "name": "System Entladegrenze"
+        "name": "BK Entladegrenze"
       },
       "wifi_cnfg_chg_soc_max": {
-        "name": "System Ladegrenze"
+        "name": "BK Ladegrenze"
       },
-       "wifi_cp_ha_dod_min_soc": {
-        "name": "Entlade-Abschaltgrenze im Haushaltsgeräte-Modus"
+      "wifi_cp_ha_dod_min_soc": {
+        "name": "EV3600 Entlade-Abschaltgrenze im Haushaltsgeräte-Modus"
       },
-       "wifi_cp_ev_dod_min_soc": {
-        "name": "Entlade-Abschaltgrenze im Autolade-Modus"
+      "wifi_cp_ev_dod_min_soc": {
+        "name": "EV3600 Entlade-Abschaltgrenze im Autolade-Modus"
       },
-       "wifi_cp_chg_dod_max_soc": {
-        "name": "Lade-Abschaltgrenze im Speicherlade-Modus"
+      "wifi_cp_chg_dod_max_soc": {
+        "name": "EV3600 Lade-Abschaltgrenze im Speicherlade-Modus"
       },
-       "wifi_sys_chg_set_power": {
-        "name": "System Ladeleistung"
+      "wifi_sys_chg_set_power": {
+        "name": "EV3600 System Ladeleistung"
       },
        "wifi_no_input_output_timeout": {
-        "name": "Leerlauf Abschaltzeit"
+        "name": "BK Leerlauf Abschaltzeit"
       },
-       "wifi_into_dod_timeout": {
-        "name": "Niedrigstand Abschaltzeit"
+      "wifi_into_dod_timeout": {
+        "name": "BK Niedrigstand Abschaltzeit"
       }
     }
   }

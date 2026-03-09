@@ -48,8 +48,8 @@ class BatterySwitchEntity(SwitchEntity, RestoreEntity):
         self._operate = False
         self._attr_available = enable
         self._attributes = {}
-        self._attr_has_entity_name = True  # 关键属性1：声明使用实体名翻译模式
-        self._attr_translation_key = switch_id
+        self._attr_has_entity_name = True  # 声明使用实体名翻译模式
+        self._attr_translation_key = switch_id  # 声明使用实体名翻译ID
 
         # 设备信息
         self._attr_device_info = GLOBAL_EQUIP_INFOS[config_entry.entry_id]
@@ -79,7 +79,7 @@ class BatterySwitchEntity(SwitchEntity, RestoreEntity):
         self.async_on_remove(
             async_dispatcher_connect(
                 self.hass,
-                f"p200_data_update_{self._config_entry.entry_id}",
+                f"data_update_{self._config_entry.entry_id}",
                 self._handle_data_update,
             )
         )
@@ -100,7 +100,7 @@ class BatterySwitchEntity(SwitchEntity, RestoreEntity):
 
         update_data = getattr(data_info, data_type, None)
 
-        if (update_data is not None) and (update_data != 0xFFFF):
+        if (update_data is not None) and (update_data != 0xFFFFFFFF):
             if update_data == 1:
                 self._attr_is_on = True
             else:

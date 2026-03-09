@@ -1,8 +1,47 @@
 import socket
 import voluptuous as vol
+from homeassistant.components.sensor.const import SensorDeviceClass
+from homeassistant.const import *
 from .global_config import *
 from typing import Any
+from .const import *
 from homeassistant.helpers import selector
+
+data_type_mapping = {
+    0: "t592",
+    1: "t593",
+    2: "t594",
+    3: "t595",
+    4: "t1001",
+    5: "t1002",
+    6: "t1003",
+    7: "t1004",
+}
+
+unit_mapping = {
+    "%": PERCENTAGE,
+    "W": UnitOfPower.WATT,
+    "Wh": UnitOfEnergy.WATT_HOUR,
+    "kWh": UnitOfEnergy.KILO_WATT_HOUR,
+    "min": UnitOfTime.MINUTES,
+    "s": UnitOfTime.SECONDS,
+    "°C": UnitOfTemperature.CELSIUS,
+    "A": UnitOfElectricCurrent.AMPERE,
+    "V": UnitOfElectricPotential.VOLT,
+    "dB": SIGNAL_STRENGTH_DECIBELS,
+    "dBm": SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
+}
+
+device_mapping = {
+    "BATTERY": SensorDeviceClass.BATTERY,
+    "POWER": SensorDeviceClass.POWER,
+    "ENERGY": SensorDeviceClass.ENERGY,
+    "CURRENT": SensorDeviceClass.CURRENT,
+    "VOLTAGE": SensorDeviceClass.VOLTAGE,
+    "TEMPERATURE": SensorDeviceClass.TEMPERATURE,
+    "SIGNAL": SensorDeviceClass.SIGNAL_STRENGTH,
+    "ENUM": SensorDeviceClass.ENUM,
+}
 
 
 def get_discover_schema(devices) -> vol.Schema:
@@ -170,3 +209,93 @@ def get_error_message(messages: str) -> str:
         return "unknown"
 
     return messages
+
+
+def get_data_unit(unit_type: str) -> str | None:
+    """根据符号获取单位."""
+    return unit_mapping.get(unit_type)
+
+
+def get_device_class(device_type: str) -> str | None:
+    """根据符号获取设备类型."""
+    return device_mapping.get(device_type)
+
+
+def get_data_value(data, data_factor) -> Any | None:
+    """根据符号获取设备类型."""
+
+    if (data is None) or (data == 0xFFFFFFFF):
+        return None
+
+    data_value = None
+
+    if data_factor.startswith("BIT"):
+        bit_position = int(data_factor[3:])  # 从索引3开始截取
+        data_value = (data >> bit_position) & 1
+        data_value = "on" if data_value == 1 else "off"
+    elif data_factor.startswith("TEMP"):
+        temp_factor = int(data_factor[4:])  # 从索引4开始截取
+        data_value = data - temp_factor
+    else:
+        count = decimal_places_from_string(data_factor)
+        factor = float(data_factor)
+        data_value = data * factor
+        if count == 0:
+            data_value = round(data_value)
+        else:
+            data_value = round(data_value, count)
+
+    return data_value
+
+
+def decimal_places_from_string(number_str) -> int:
+    """获取小数位数."""
+    # 检查是否为字符串
+    if not isinstance(number_str, str):
+        number_str = str(number_str)
+
+    # 分割整数部分和小数部分
+    if "." in number_str:
+        dot_index = number_str.find(".")
+        decimal_digits = len(number_str) - dot_index - 1
+        return decimal_digits
+
+    return 0
+
+
+def get_entity_available(data_type, data_info, data_factor) -> bool:
+    """根据上报数据获取实体是否可用."""
+
+    available = False
+
+    if data_type == "t586":
+        bit_position = int(data_factor[3:])  # 从索引3开始截取
+        data_type = data_type_mapping.get(bit_position)
+
+    if data_type is not None:
+        update_data = getattr(data_info, data_type, None)
+
+    if (update_data is None) or (update_data == 0xFFFFFFFF):
+        update_data = -1
+
+    if update_data == -1:
+        available = False
+    else:
+        available = True
+
+    return available
+
+
+def get_entity_state_class(sensor_id) -> str | None:
+    """根据实体类型获取state_class."""
+
+    state_class = "measurement"
+
+    data_type = ENTITY_SENSOR_TYPES[sensor_id]
+
+    if data_type == "t586":
+        state_class = None
+    else:
+        state_class = "measurement"
+
+    return state_class

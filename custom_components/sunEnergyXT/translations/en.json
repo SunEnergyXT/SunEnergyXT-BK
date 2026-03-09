@@ -97,31 +97,31 @@
   "entity": {
     "sensor": {
       "wifi_soc": {
-        "name": "Battery level"
+        "name": "BK Battery Level"
       },
       "wifi_b_actual_soc": {
         "name": "Head storage"
       },
       "wifi_b1_actual_soc": {
-        "name": "Expansion storage 1"
+        "name": "Expansion 1 storage"
       },
       "wifi_b2_actual_soc": {
-        "name": "Expansion storage 2"
+        "name": "Expansion 2 storage"
       },
       "wifi_b3_actual_soc": {
-        "name": "Expansion storage 3"
+        "name": "Expansion 3 storage"
       },
       "wifi_b4_actual_soc": {
-        "name": "Expansion storage 4"
+        "name": "Expansion 4 storage"
       },
       "wifi_b5_actual_soc": {
-        "name": "Expansion storage 5"
+        "name": "Expansion 5 storage"
       },
       "wifi_b6_actual_soc": {
-        "name": "Expansion storage 6"
+        "name": "Expansion 6 storage"
       },
       "wifi_b7_actual_soc": {
-        "name": "Expansion storage 7"
+        "name": "Expansion 7 storage"
       },
       "wifi_mbms_hw_limited_disc_soc_min": {
         "name": "Head HW discharge limit"
@@ -171,58 +171,246 @@
       "wifi_sbms7_hw_limited_chg_soc_max": {
         "name": "Expansion 7 HW charge limit"
       },
-       "wifi_connection": {
+      "wifi_inputpower_total": {
+        "name": "BK Total Input Power"
+      },
+      "wifi_outputpower_total": {
+        "name": "BK Total Output Power"
+      },
+      "wifi_eepc_day": {
+        "name": "BK Daily Yield"
+      },
+      "wifi_outputenergy_day": {
+        "name": "BK Daily Output Energy"
+      },
+      "wifi_cp_ac_chg_energy_day": {
+        "name": "EV3600 Daily Grid Charge"
+      },
+      "wifi_cp_ac_inputpower": {
+        "name": "EV3600 Grid Input Power"
+      },
+      "wifi_car_chg_mode_power": {
+        "name": "EV3600 Car Charging Power"
+      },
+      "wifi_home_mode_power": {
+        "name": "EV3600 Home Load Power"
+      },
+      "wifi_inputpower_pv1": {
+        "name": "Head PV1 Power"
+      },
+      "wifi_inputpower_pv2": {
+        "name": "Head PV2 Power"
+      },
+      "wifi_inputpower_pv3": {
+        "name": "Expansion 1 MPPT Power"
+      },
+      "wifi_inputpower_pv4": {
+        "name": "Expansion 2 MPPT Power"
+      },
+      "wifi_inputpower_pv5": {
+        "name": "Expansion 3 MPPT Power"
+      },
+      "wifi_inputpower_pv6": {
+        "name": "Expansion 4 MPPT Power"
+      },
+      "wifi_inputpower_pv7": {
+        "name": "Expansion 5 MPPT Power"
+      },
+      "wifi_inputpower_pv8": {
+        "name": "Expansion 6 MPPT Power"
+      },
+      "wifi_inputpower_pv9": {
+        "name": "Expansion 7 MPPT Power"
+      },
+      "wifi_b_celltemp": {
+        "name": "Head Battery Temp"
+      },
+      "wifi_b1_celltemp": {
+        "name": "Expansion 1 Temp"
+      },
+      "wifi_b2_celltemp": {
+        "name": "Expansion 2 Temp"
+      },
+      "wifi_b3_celltemp": {
+        "name": "Expansion 3 Temp"
+      },
+      "wifi_b4_celltemp": {
+        "name": "Expansion 4 Temp"
+      },
+      "wifi_b5_celltemp": {
+        "name": "Expansion 5 Temp"
+      },
+      "wifi_b6_celltemp": {
+        "name": "Expansion 6 Temp"
+      },
+      "wifi_b7_celltemp": {
+        "name": "Expansion 7 Temp"
+      },
+      "wifi_b_heater_working_status": {
+        "name": "Head Heater State",
+          "state": {
+            "on": "On",
+            "off": "Off"
+        }
+      },
+      "wifi_b1_heater_working_status": {
+        "name": "Expansion 1 Heater State",
+        "state": {
+          "on": "On",
+          "off": "Off"
+        }
+      },
+      "wifi_b2_heater_working_status": {
+        "name": "Expansion 2 Heater State",
+        "state": {
+          "on": "On",
+          "off": "Off"
+        }
+      },
+      "wifi_b3_heater_working_status": {
+        "name": "Expansion 3 Heater State",
+        "state": {
+          "on": "On",
+          "off": "Off"
+        }
+      },
+      "wifi_b4_heater_working_status": {
+        "name": "Expansion 4 Heater State",
+        "state": {
+          "on": "On",
+          "off": "Off"
+        }
+      },
+      "wifi_b5_heater_working_status": {
+        "name": "Expansion 5 Heater State",
+        "state": {
+          "on": "On",
+          "off": "Off"
+        }
+      },
+      "wifi_b6_heater_working_status": {
+        "name": "Expansion 6 Heater State",
+        "state": {
+          "on": "On",
+          "off": "Off"
+        }
+      },
+      "wifi_b7_heater_working_status": {
+        "name": "Expansion 7 Heater State",
+        "state": {
+          "on": "On",
+          "off": "Off"
+        }
+      },
+      "wifi_mbms_mppt1_in_i": {
+        "name": "Head MPPT1 Current"
+      },
+      "wifi_mbms_mppt1_in_v": {
+        "name": "Head MPPT1 Voltage"
+      },
+      "wifi_mbms_mppt2_in_i": {
+        "name": "Head MPPT2 Current"
+      },
+      "wifi_mbms_mppt2_in_v": {
+        "name": "Head MPPT2 Voltage"
+      },
+      "wifi_sbms1_mppt_in_i": {
+        "name": "Expansion 1 MPPT Current"
+      },
+      "wifi_sbms1_mppt_in_v": {
+        "name": "Expansion 1 MPPT Voltage"
+      },
+      "wifi_sbms2_mppt_in_i": {
+        "name": "Expansion 2 MPPT Current"
+      },
+      "wifi_sbms2_mppt_in_v": {
+        "name": "Expansion 2 MPPT Voltage"
+      },
+      "wifi_sbms3_mppt_in_i": {
+        "name": "Expansion 3 MPPT Current"
+      },
+      "wifi_sbms3_mppt_in_v": {
+        "name": "Expansion 3 MPPT Voltage"
+      },
+       "wifi_sbms4_mppt_in_i": {
+        "name": "Expansion 4 MPPT Current"
+      },
+       "wifi_sbms4_mppt_in_v": {
+        "name": "Expansion 4 MPPT Voltage"
+      },
+       "wifi_sbms5_mppt_in_i": {
+        "name": "Expansion 5 MPPT Current"
+      },
+       "wifi_sbms5_mppt_in_v": {
+        "name": "Expansion 5 MPPT Voltage"
+      },
+       "wifi_sbms6_mppt_in_i": {
+        "name": "Expansion 6 MPPT Current"
+      },
+       "wifi_sbms6_mppt_in_v": {
+        "name": "Expansion 6 MPPT Voltage"
+      },
+       "wifi_sbms7_mppt_in_i": {
+        "name": "Expansion 7 MPPT Current"
+      },
+       "wifi_sbms7_mppt_in_v": {
+        "name": "Expansion 7 MPPT Voltage"
+      },
+      "wifi_connection": {
         "name": "Connection State",
         "state": {
           "connected": "Connected",
           "disconnected": "Disconnected"
         }
       },
-       "wifi_update_time": {
+      "wifi_wireless_network_rssi": {
+        "name": "Wi-Fi Signal Strength"
+      },
+      "wifi_update_time": {
         "name": "Last Update Time"
       }
     },
     "switch": {
       "wifi_system_local_comm_enable": {
-        "name": "Local Mode"
+        "name": "BK Local Mode"
       },
       "wifi_chg_mode_hm": {
-        "name": "Battery Charging Mode"
+        "name": "EV3600 Battery Charging Mode"
       },
       "wifi_car_chg_mode_hm": {
-        "name": "Car Charging Mode"
+        "name": "EV3600 Car Charging Mode"
       },
       "wifi_home_mode_hm": {
-        "name": "Home Appliance Mode"
+        "name": "EV3600 Home Appliance Mode"
       },
       "wifi_cp_ev_ac_active_set": {
-        "name": "AC Active Mode"
+        "name": "EV3600 Car Grid Charging Active"
       }
     },
     "number": {
       "wifi_cnfg_disc_soc_min": {
-        "name": "System Discharge Limit"
+        "name": "BK Discharge Limit"
       },
       "wifi_cnfg_chg_soc_max": {
-        "name": "System Charge Limit"
+        "name": "BK Charge Limit"
       },
-       "wifi_cp_ha_dod_min_soc": {
-        "name": "Discharge Cutoff SOC Setting (Home Appliance Mode)"
+      "wifi_cp_ha_dod_min_soc": {
+        "name": "EV3600 Discharge Cutoff SOC Setting (Home Appliance Mode)"
       },
-       "wifi_cp_ev_dod_min_soc": {
-        "name": "Discharge Cutoff SOC Setting (Car Charging Mode)"
+      "wifi_cp_ev_dod_min_soc": {
+        "name": "EV3600 Discharge Cutoff SOC Setting (Car Charging Mode)"
       },
-       "wifi_cp_chg_dod_max_soc": {
-        "name": "Charge Cutoff SOC Setting (Battery Charging Mode)"
+      "wifi_cp_chg_dod_max_soc": {
+        "name": "EV3600 Charge Cutoff SOC Setting (Battery Charging Mode)"
       },
-       "wifi_sys_chg_set_power": {
-        "name": "System Charging Power"
+      "wifi_sys_chg_set_power": {
+        "name": "EV3600 System Charging Setting Power"
       },
-       "wifi_no_input_output_timeout": {
-        "name": "Idle Auto-Shutdown Time"
+      "wifi_no_input_output_timeout": {
+        "name": "BK Idle Auto-Shutdown Time"
       },
-       "wifi_into_dod_timeout": {
-        "name": "Low Battery Auto-Shutdown Time"
+      "wifi_into_dod_timeout": {
+        "name": "BK Low Battery Auto-Shutdown Time"
       }
     }
   }

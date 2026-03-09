@@ -1,7 +1,6 @@
 import logging
 import asyncio
 from homeassistant.components.number import NumberEntity
-from homeassistant.const import UnitOfPower, UnitOfTime, PERCENTAGE
 from homeassistant.helpers.restore_state import RestoreEntity
 from .const import *
 from .tcp_client import *
@@ -9,6 +8,7 @@ from homeassistant.helpers.dispatcher import async_dispatcher_connect
 from homeassistant.core import callback
 from datetime import datetime
 from .global_config import *
+from .util import *
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -19,62 +19,20 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
 
     number_entities = list(ENTITY_NUMBER_TYPES.keys())
 
-    # SOC 相关数值实体 (百分比 0-100)
-    soc_entities = [
-        entity for entity in number_entities if "soc" in str(entity).lower()
-    ]
+    for number_id in number_entities:
+        min_val, max_val, step, unit_type, enable = ENTITY_NUMBER_VALUES[number_id]
 
-    for number_id in soc_entities:
-        min_val, max_val, step, enable = ENTITY_NUMBER_VALUES[number_id]
+        unit = get_data_unit(unit_type)
+
         entities.append(
             BatteryNumberEntity(
                 hass,
                 config_entry,
                 number_id,
-                PERCENTAGE,
+                unit,
                 min_val,
                 max_val,
                 step,
-                enable,
-            )
-        )
-
-    # 功率实体
-    power_entities = [
-        entity for entity in number_entities if "power" in str(entity).lower()
-    ]
-
-    for number_id in power_entities:
-        min_val, max_val, step, enable = ENTITY_NUMBER_VALUES[number_id]
-        entities.append(
-            BatteryNumberEntity(
-                hass,
-                config_entry,
-                number_id,
-                UnitOfPower.WATT,
-                min_val,
-                max_val,  # 假设最大功率 10kW
-                step,
-                enable,
-            )
-        )
-
-    # 时间实体 (秒)
-    timeout_entities = [
-        entity for entity in number_entities if "time" in str(entity).lower()
-    ]
-
-    for number_id in timeout_entities:
-        min_val, max_val, step, enable = ENTITY_NUMBER_VALUES[number_id]
-        entities.append(
-            BatteryNumberEntity(
-                hass,
-                config_entry,
-                number_id,
-                UnitOfTime.MINUTES,
-                min_val,
-                max_val,  # 最大1440
-                step,  # 步长1min
                 enable,
             )
         )
@@ -118,8 +76,8 @@ class BatteryNumberEntity(NumberEntity, RestoreEntity):
         self._operate = False
         self._attributes = {}
         self._attr_native_value = min_value  # 默认值
-        self._attr_has_entity_name = True  # 关键属性1：声明使用实体名翻译模式
-        self._attr_translation_key = number_id
+        self._attr_has_entity_name = True  # 声明使用实体名翻译模式
+        self._attr_translation_key = number_id  # 声明使用实体名翻译ID
         # 设备信息
         self._attr_device_info = GLOBAL_EQUIP_INFOS[config_entry.entry_id]
 
@@ -139,7 +97,7 @@ class BatteryNumberEntity(NumberEntity, RestoreEntity):
         self.async_on_remove(
             async_dispatcher_connect(
                 self.hass,
-                f"p200_data_update_{self._config_entry.entry_id}",
+                f"data_update_{self._config_entry.entry_id}",
                 self._handle_data_update,
             )
         )
@@ -160,7 +118,7 @@ class BatteryNumberEntity(NumberEntity, RestoreEntity):
 
         update_data = getattr(data_info, data_type, None)
 
-        if (update_data is not None) and (update_data != 0xFFFF):
+        if (update_data is not None) and (update_data != 0xFFFFFFFF):
             self._attr_native_value = update_data
 
             self._attributes["last_update"] = datetime.now().strftime(

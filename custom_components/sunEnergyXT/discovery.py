@@ -145,20 +145,6 @@ class MdnsManager:
 
             _LOGGER.info(message)
 
-        # keys_list = list(self.hass.data[DOMAIN].keys())
-
-        # # 通知Home Assistant有新设备
-        # self.hass.async_create_task(
-        #     self.hass.config_entries.async_reload(keys_list[1])
-        # )
-
-        # # 触发Home Assistant的配置流
-        # await self.hass.config_entries.flow.async_init(
-        #     "p200",  # 你的集成域名
-        #     context={"source": config_entries.SOURCE_ZEROCONF},
-        #     data=device_info,
-        # )
-
         except Exception as e:
             message = "error handling service add: %s", e
             _LOGGER.error(message)
@@ -186,20 +172,6 @@ class MdnsManager:
             message = f"update mdns discovery sn:{serial_number} host:{host}"
 
             _LOGGER.info(message)
-
-            # keys_list = list(self.hass.data[DOMAIN].keys())
-
-            # # 通知Home Assistant有新设备
-            # self.hass.async_create_task(
-            #     self.hass.config_entries.async_reload(keys_list[1])
-            # )
-
-            # # 触发Home Assistant的配置流
-            # await self.hass.config_entries.flow.async_init(
-            #     "p200",  # 你的集成域名
-            #     context={"source": config_entries.SOURCE_ZEROCONF},
-            #     data=device_info,
-            # )
 
         except Exception as e:
             message = "error handling service update: %s", e
@@ -244,15 +216,6 @@ class MdnsManager:
         self.hass.async_create_task(
             self.hass.config_entries.async_reload(current_entry.entry_id)
         )
-
-        # await self.hass.config_entries.async_reload(current_entry.entry_id)
-
-        # async_dispatcher_send(
-        #     self.hass,
-        #     f"p200_options_update_{serial_number}",
-        #     self.hass,
-        #     device_info,  # 正确传递参数
-        # )
 
     async def async_handle_service_remove(self, service_name):
         """mdns设备删除函数."""

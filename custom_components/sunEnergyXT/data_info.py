@@ -22,7 +22,7 @@ class RequestInfo:
         def remove_ffff(d):
             # """递归删除值为0xFFFF的字段"""
             if isinstance(d, dict):
-                return {k: remove_ffff(v) for k, v in d.items() if v != 0xFFFF}
+                return {k: remove_ffff(v) for k, v in d.items() if v != 0xFFFFFFFF}
 
             if isinstance(d, list):
                 return [remove_ffff(item) for item in d]
@@ -30,7 +30,9 @@ class RequestInfo:
             return d
 
         data_dict = asdict(self)
+
         filtered_dict = remove_ffff(data_dict)
+
         return json.dumps(filtered_dict, separators=(",", ":"))
 
     @classmethod
@@ -64,11 +66,12 @@ class RespondInfo:
         def remove_ffff(d):
             # """递归删除值为0xFFFF的字段"""
             if isinstance(d, dict):
-                return {k: remove_ffff(v) for k, v in d.items() if v != 0xFFFF}
-            elif isinstance(d, list):
+                return {k: remove_ffff(v) for k, v in d.items() if v != 0xFFFFFFFF}
+
+            if isinstance(d, list):
                 return [remove_ffff(item) for item in d]
-            else:
-                return d
+
+            return d
 
         data_dict = asdict(self)
         filtered_dict = remove_ffff(data_dict)
@@ -93,50 +96,97 @@ class DataInfo:
     """数据信息类."""
 
     # switch
-    t700_1: int = 0xFFFF
-    t701_1: int = 0xFFFF
-    t702_1: int = 0xFFFF
-    t728: int = 0xFFFF
-    t598: int = 0xFFFF
+    t700_1: int = 0xFFFFFFFF
+    t701_1: int = 0xFFFFFFFF
+    t702_1: int = 0xFFFFFFFF
+    t728: int = 0xFFFFFFFF
+    t598: int = 0xFFFFFFFF
 
     # numbers
-    t362: int = 0xFFFF
-    t363: int = 0xFFFF
-    t720: int = 0xFFFF
-    t721: int = 0xFFFF
-    t727: int = 0xFFFF
-    t590: int = 0xFFFF
-    t596: int = 0xFFFF
-    t597: int = 0xFFFF
+    t362: int = 0xFFFFFFFF
+    t363: int = 0xFFFFFFFF
+    t720: int = 0xFFFFFFFF
+    t721: int = 0xFFFFFFFF
+    t727: int = 0xFFFFFFFF
+    t590: int = 0xFFFFFFFF
+    t596: int = 0xFFFFFFFF
+    t597: int = 0xFFFFFFFF
 
     # sensor
-    t211: int = 0xFFFF
-    t592: int = 0xFFFF
-    t593: int = 0xFFFF
-    t594: int = 0xFFFF
-    t595: int = 0xFFFF
-    t1001: int = 0xFFFF
-    t1002: int = 0xFFFF
-    t1003: int = 0xFFFF
-    t1004: int = 0xFFFF
+    t211: int = 0xFFFFFFFF
+    t592: int = 0xFFFFFFFF
+    t593: int = 0xFFFFFFFF
+    t594: int = 0xFFFFFFFF
+    t595: int = 0xFFFFFFFF
+    t1001: int = 0xFFFFFFFF
+    t1002: int = 0xFFFFFFFF
+    t1003: int = 0xFFFFFFFF
+    t1004: int = 0xFFFFFFFF
 
-    t507: int = 0xFFFF
-    t508: int = 0xFFFF
-    t509: int = 0xFFFF
-    t510: int = 0xFFFF
-    t511: int = 0xFFFF
-    t512: int = 0xFFFF
-    t513: int = 0xFFFF
-    t514: int = 0xFFFF
+    t507: int = 0xFFFFFFFF
+    t508: int = 0xFFFFFFFF
+    t509: int = 0xFFFFFFFF
+    t510: int = 0xFFFFFFFF
+    t511: int = 0xFFFFFFFF
+    t512: int = 0xFFFFFFFF
+    t513: int = 0xFFFFFFFF
+    t514: int = 0xFFFFFFFF
 
-    t948: int = 0xFFFF
-    t949: int = 0xFFFF
-    t950: int = 0xFFFF
-    t951: int = 0xFFFF
-    t952: int = 0xFFFF
-    t953: int = 0xFFFF
-    t954: int = 0xFFFF
-    t955: int = 0xFFFF
+    t948: int = 0xFFFFFFFF
+    t949: int = 0xFFFFFFFF
+    t950: int = 0xFFFFFFFF
+    t951: int = 0xFFFFFFFF
+    t952: int = 0xFFFFFFFF
+    t953: int = 0xFFFFFFFF
+    t954: int = 0xFFFFFFFF
+    t955: int = 0xFFFFFFFF
+
+    t33: int = 0xFFFFFFFF
+    t34: int = 0xFFFFFFFF
+    t49: int = 0xFFFFFFFF
+    t66: int = 0xFFFFFFFF
+    t710: int = 0xFFFFFFFF
+    t711: int = 0xFFFFFFFF
+    t701_4: int = 0xFFFFFFFF
+    t702_4: int = 0xFFFFFFFF
+    t50: int = 0xFFFFFFFF
+    t62: int = 0xFFFFFFFF
+    t63: int = 0xFFFFFFFF
+    t64: int = 0xFFFFFFFF
+    t65: int = 0xFFFFFFFF
+    t812: int = 0xFFFFFFFF
+    t813: int = 0xFFFFFFFF
+    t814: int = 0xFFFFFFFF
+    t815: int = 0xFFFFFFFF
+
+    t220: int = 0xFFFFFFFF
+    t233: int = 0xFFFFFFFF
+    t246: int = 0xFFFFFFFF
+    t259: int = 0xFFFFFFFF
+    t836: int = 0xFFFFFFFF
+    t849: int = 0xFFFFFFFF
+    t862: int = 0xFFFFFFFF
+    t875: int = 0xFFFFFFFF
+    t586: int = 0xFFFFFFFF
+    t537: int = 0xFFFFFFFF
+    t536: int = 0xFFFFFFFF
+    t545: int = 0xFFFFFFFF
+    t544: int = 0xFFFFFFFF
+    t553: int = 0xFFFFFFFF
+    t552: int = 0xFFFFFFFF
+    t561: int = 0xFFFFFFFF
+    t560: int = 0xFFFFFFFF
+    t569: int = 0xFFFFFFFF
+    t568: int = 0xFFFFFFFF
+    t970: int = 0xFFFFFFFF
+    t969: int = 0xFFFFFFFF
+    t978: int = 0xFFFFFFFF
+    t977: int = 0xFFFFFFFF
+    t986: int = 0xFFFFFFFF
+    t985: int = 0xFFFFFFFF
+    t994: int = 0xFFFFFFFF
+    t993: int = 0xFFFFFFFF
+    t475: int = 0xFFFFFFFF
 
     def data_to_json(self) -> str:
         """数据信息类转jason字符串函数."""
@@ -158,8 +208,12 @@ class DataInfo:
 class DiagnosticInfo:
     """诊断数据信息类."""
 
+    # 网络连接状态
     connection: str = ""
+    # 数据更新时间
     reporttime: str = ""
+    # 网络信号强度
+    networkrssi: str = ""
 
     def diagnostic_to_json(self) -> str:
         """诊断数据类转jason字符串函数."""

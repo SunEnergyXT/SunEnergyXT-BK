@@ -171,14 +171,202 @@
       "wifi_sbms7_hw_limited_chg_soc_max": {
         "name": "从机7硬件充电上限"
       },
-       "wifi_connection": {
+      "wifi_inputpower_total": {
+        "name": "总输入功率"
+      },
+      "wifi_outputpower_total": {
+        "name": "总输出功率"
+      },
+      "wifi_eepc_day": {
+        "name": "日累计发电量"
+      },
+      "wifi_outputenergy_day": {
+        "name": "日输出电量"
+      },
+      "wifi_cp_ac_chg_energy_day": {
+        "name": "日市电充电电量"
+      },
+      "wifi_cp_ac_inputpower": {
+        "name": "市电输入功率"
+      },
+      "wifi_car_chg_mode_power": {
+        "name": "车充模式实时功率"
+      },
+      "wifi_home_mode_power": {
+        "name": "家电模式实时功率"
+      },
+      "wifi_inputpower_pv1": {
+        "name": "主机PV1输入功率"
+      },
+      "wifi_inputpower_pv2": {
+        "name": "主机PV2输入功率"
+      },
+      "wifi_inputpower_pv3": {
+        "name": "从机1PV输入功率"
+      },
+      "wifi_inputpower_pv4": {
+        "name": "从机2PV输入功率"
+      },
+      "wifi_inputpower_pv5": {
+        "name": "从机3PV输入功率"
+      },
+      "wifi_inputpower_pv6": {
+        "name": "从机4PV输入功率"
+      },
+      "wifi_inputpower_pv7": {
+        "name": "从机5PV输入功率"
+      },
+      "wifi_inputpower_pv8": {
+        "name": "从机6PV输入功率"
+      },
+      "wifi_inputpower_pv9": {
+        "name": "从机7PV输入功率"
+      },
+      "wifi_b_celltemp": {
+        "name": "主机电池温度"
+      },
+      "wifi_b1_celltemp": {
+        "name": "从机1电池温度"
+      },
+      "wifi_b2_celltemp": {
+        "name": "从机2电池温度"
+      },
+      "wifi_b3_celltemp": {
+        "name": "从机3电池温度"
+      },
+      "wifi_b4_celltemp": {
+        "name": "从机4电池温度"
+      },
+      "wifi_b5_celltemp": {
+        "name": "从机5电池温度"
+      },
+      "wifi_b6_celltemp": {
+        "name": "从机6电池温度"
+      },
+      "wifi_b7_celltemp": {
+        "name": "从机7电池温度"
+      },
+      "wifi_b_heater_working_status": {
+        "name": "主机加热状态",
+          "state": {
+            "on": "开启",
+            "off": "关闭"
+        }
+      },
+      "wifi_b1_heater_working_status": {
+        "name": "从机1加热状态",
+        "state": {
+          "on": "开启",
+          "off": "关闭"
+        }
+      },
+      "wifi_b2_heater_working_status": {
+        "name": "从机2加热状态",
+        "state": {
+          "on": "开启",
+          "off": "关闭"
+        }
+      },
+      "wifi_b3_heater_working_status": {
+        "name": "从机3加热状态",
+        "state": {
+          "on": "开启",
+          "off": "关闭"
+        }
+      },
+      "wifi_b4_heater_working_status": {
+        "name": "从机4加热状态",
+        "state": {
+          "on": "开启",
+          "off": "关闭"
+        }
+      },
+      "wifi_b5_heater_working_status": {
+        "name": "从机5加热状态",
+        "state": {
+          "on": "开启",
+          "off": "关闭"
+        }
+      },
+      "wifi_b6_heater_working_status": {
+        "name": "从机6加热状态",
+        "state": {
+          "on": "开启",
+          "off": "关闭"
+        }
+      },
+      "wifi_b7_heater_working_status": {
+        "name": "从机7加热状态",
+        "state": {
+          "on": "开启",
+          "off": "关闭"
+        }
+      },
+      "wifi_mbms_mppt1_in_i": {
+        "name": "主机MPPT1电流"
+      },
+      "wifi_mbms_mppt1_in_v": {
+        "name": "主机MPPT1电压"
+      },
+      "wifi_mbms_mppt2_in_i": {
+        "name": "主机MPPT2电流"
+      },
+      "wifi_mbms_mppt2_in_v": {
+        "name": "主机MPPT2电压"
+      },
+      "wifi_sbms1_mppt_in_i": {
+        "name": "从机1MPPT电流"
+      },
+      "wifi_sbms1_mppt_in_v": {
+        "name": "从机1MPPT电压"
+      },
+      "wifi_sbms2_mppt_in_i": {
+        "name": "从机2MPPT电流"
+      },
+      "wifi_sbms2_mppt_in_v": {
+        "name": "从机2MPPT电压"
+      },
+      "wifi_sbms3_mppt_in_i": {
+        "name": "从机3MPPT电流"
+      },
+      "wifi_sbms3_mppt_in_v": {
+        "name": "从机3MPPT电压"
+      },
+       "wifi_sbms4_mppt_in_i": {
+        "name": "从机4MPPT电流"
+      },
+       "wifi_sbms4_mppt_in_v": {
+        "name": "从机4MPPT电压"
+      },
+       "wifi_sbms5_mppt_in_i": {
+        "name": "从机5MPPT电流"
+      },
+       "wifi_sbms5_mppt_in_v": {
+        "name": "从机5MPPT电压"
+      },
+       "wifi_sbms6_mppt_in_i": {
+        "name": "从机6MPPT电流"
+      },
+       "wifi_sbms6_mppt_in_v": {
+        "name": "从机6MPPT电压"
+      },
+       "wifi_sbms7_mppt_in_i": {
+        "name": "从机7MPPT电流"
+      },
+       "wifi_sbms7_mppt_in_v": {
+        "name": "从机7MPPT电压"
+      },
+      "wifi_connection": {
         "name": "网络连接状态",
         "state": {
           "connected": "连接",
           "disconnected": "未连接"
         }
       },
-       "wifi_update_time": {
+      "wifi_wireless_network_rssi": {
+        "name": "网络信号强度"
+      },
+      "wifi_update_time": {
         "name": "数据更新时间"
       }
     },
@@ -206,22 +394,22 @@
       "wifi_cnfg_chg_soc_max": {
         "name": "系统充电上限"
       },
-       "wifi_cp_ha_dod_min_soc": {
+      "wifi_cp_ha_dod_min_soc": {
         "name": "车充盒家电模式下的放电截止电量设置"
       },
-       "wifi_cp_ev_dod_min_soc": {
+      "wifi_cp_ev_dod_min_soc": {
         "name": "车充盒车充模式下的放电截止SOC设置"
       },
-       "wifi_cp_chg_dod_max_soc": {
+      "wifi_cp_chg_dod_max_soc": {
         "name": "车充盒充电模式下的充电截止SOC设置"
       },
-       "wifi_sys_chg_set_power": {
+      "wifi_sys_chg_set_power": {
         "name": "系统充电功率"
       },
-       "wifi_no_input_output_timeout": {
+      "wifi_no_input_output_timeout": {
         "name": "闲置自动关机时间"
       },
-       "wifi_into_dod_timeout": {
+      "wifi_into_dod_timeout": {
         "name": "低电量自动关机时间"
       }
     }

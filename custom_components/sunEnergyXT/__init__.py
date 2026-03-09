@@ -7,8 +7,7 @@ from .const import DOMAIN
 from .discovery import *
 from .equip_info import EquipInfo
 from .global_config import *
-from .discovery import *
-from .util import *
+from .util import *  # type: ignore
 
 PLATFORMS = [Platform.NUMBER, Platform.SWITCH, Platform.SENSOR]
 

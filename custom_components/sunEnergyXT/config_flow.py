@@ -1,12 +1,11 @@
 from typing import Any
-import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.core import callback
 from .const import DOMAIN
 from .tcp_client import *
 from .discovery import *
 from .global_config import *
-from .util import *
+from .util import *  # type: ignore
 
 
 class BkConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):

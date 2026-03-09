@@ -42,7 +42,7 @@ class TcpClient:
             # 失败后尝试连接不需要重复开启监听
             if self.check_connect_task is None:
                 self.check_connect_task = asyncio.create_task(
-                    self.async_check_connect(), name="p200_check_connect_task"
+                    self.async_check_connect(), name="tcp_check_connect_task"
                 )
 
             # 建立TCP连接,需要超时机制
@@ -64,7 +64,7 @@ class TcpClient:
             self.listen_data_task = None
 
             self.listen_data_task = asyncio.create_task(
-                self.async_listen_data(), name="p200_listen_data_task"
+                self.async_listen_data(), name="tcp_listen_data_task"
             )
 
             message = f"connect to{self.host}:{self.port}"
@@ -189,7 +189,7 @@ class TcpClient:
             try:
                 if self.reader is not None:
                     # 根据你的TCP服务器数据格式进行调整,此处会一直等待接收数据
-                    data = await self.reader.read(1024)
+                    data = await self.reader.read(2048)
 
                 if not data:
                     message = f"{self.serial_number} disconnect"
@@ -203,35 +203,48 @@ class TcpClient:
                 # 解析数据，这里假设服务器发送JSON格式的SOC信息
                 decoded_data = data.decode("ascii", errors="ignore")
 
-                if decoded_data == "":
-                    continue
+                data_lines = decoded_data.splitlines()
 
-                if "xaa" in decoded_data.lower():
-                    continue
+                for data_line in data_lines:
+                    if data_line == "":
+                        continue
 
-                if "code" not in decoded_data.lower():
-                    continue
+                    if "xaa" in data_line.lower():
+                        continue
 
-                if not decoded_data.lower().startswith('{"code":'):
-                    continue
+                    if "code" not in data_line.lower():
+                        continue
 
-                count_code = decoded_data.lower().count("code")
+                    if not data_line.lower().startswith('{"code":'):
+                        continue
 
-                if count_code != 1:
-                    continue
+                    count_code = data_line.lower().count("code")
 
-                respond_info = RespondInfo.json_to_respond(decoded_data)
+                    if count_code != 1:
+                        continue
 
-                # 设置响应S
-                if respond_info.code == 0x6057:
-                    self.data.put(respond_info)
+                    respond_info = await self.async_prase_data(data_line)
 
-                # 数据上报
-                if respond_info.code in {0x6052, 0x6055}:
-                    await self.async_update_diagnostics("reporttime")
-                    await self.async_update_entities(respond_info)
+                    if respond_info is None:
+                        continue
 
-                self.last_time = datetime.now()
+                    # 设置响应S
+                    if respond_info.code == 0x6057:
+                        self.data.put(respond_info)
+
+                    # 数据上报
+                    if respond_info.code in {0x6052, 0x6055, 0x6060}:
+                        # 更新数据刷新时间
+                        await self.async_update_diagnostics("reporttime")
+                        # 更新网络强度
+                        await self.async_update_diagnostics(
+                            "networkrssi", respond_info.data
+                        )
+                        # 更新实体信息
+                        await self.async_update_entities(respond_info)
+
+                    self.last_time = datetime.now()
+
             except Exception as e:
                 message = "async_listen_data_error: %s", e
                 _LOGGER.error(message)
@@ -276,26 +289,35 @@ class TcpClient:
         # 当其他地方发送这个信号时，_handle_data_update会被调用
         async_dispatcher_send(
             self.hass,
-            f"p200_data_update_{self.entry_id}",
+            f"data_update_{self.entry_id}",
             data,  # 可选的参数
         )
 
-    async def async_update_diagnostics(self, flag):
+    async def async_update_diagnostics(self, flag, respond_data=None):
         """传感器诊断实体更新函数."""
 
-        connect_state = "connected" if self.connected else "disconnected"
-
-        report_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
         if flag == "connected":
+            connect_state = "connected" if self.connected else "disconnected"
             diagnostics_info = DiagnosticInfo(connection=connect_state)
-        else:
+
+        if flag == "networkrssi":
+            rssi = getattr(respond_data, "t475", None)
+
+            if (rssi is not None) and (rssi != 0xFFFFFFFF):
+                rssi_data = f"-{rssi} dB"
+            else:
+                rssi_data = ""
+
+            diagnostics_info = DiagnosticInfo(networkrssi=rssi_data)
+
+        if flag == "reporttime":
+            report_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             diagnostics_info = DiagnosticInfo(reporttime=report_time)
 
         # """通知诊断传感器实体更新状态"""
         async_dispatcher_send(
             self.hass,
-            f"p200_diagnostic_update_{self.entry_id}",
+            f"diagnostic_update_{self.entry_id}",
             diagnostics_info,  # 可选的参数
         )
 
@@ -335,3 +357,12 @@ class TcpClient:
                 _LOGGER.error(message)
             finally:
                 self.check_connect_task = None
+
+    async def async_prase_data(self, data) -> RespondInfo | None:
+        """TCP客户端数据解析函数."""
+        try:
+            return RespondInfo.json_to_respond(data)
+        except Exception as e:
+            message = "async_listen_prase_data_error: %s", e
+            _LOGGER.error(message)
+            return None

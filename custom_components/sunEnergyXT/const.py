@@ -64,14 +64,14 @@ ENTITY_NUMBER_TYPES = {
 
 # NumberValue初始化值
 ENTITY_NUMBER_VALUES = {
-    WIFI_CNFG_DISC_SOC_MIN: (1, 20, 1, True),
-    WIFI_CNFG_CHG_SOC_MAX: (70, 100, 1, True),
-    WIFI_CP_HA_DOD_MIN_SOC: (5, 20, 1, False),
-    WIFI_CP_EV_DOD_MIN_SOC: (5, 40, 1, False),
-    WIFI_CP_CHG_DOD_MAX_SOC: (80, 100, 1, False),
-    WIFI_SYS_CHG_SET_POWER: (0, 3600, 1, True),
-    WIFI_NO_INPUT_OUTPUT_TIMEOUT: (15, 1440, 1, True),
-    WIFI_INTO_DOD_TIMEOUT: (5, 1440, 1, True),
+    WIFI_CNFG_DISC_SOC_MIN: (1, 20, 1, "%", True),
+    WIFI_CNFG_CHG_SOC_MAX: (70, 100, 1, "%", True),
+    WIFI_CP_HA_DOD_MIN_SOC: (5, 20, 1, "%", False),
+    WIFI_CP_EV_DOD_MIN_SOC: (5, 40, 1, "%", False),
+    WIFI_CP_CHG_DOD_MAX_SOC: (80, 100, 1, "%", False),
+    WIFI_SYS_CHG_SET_POWER: (0, 3600, 1, "W", False),
+    WIFI_NO_INPUT_OUTPUT_TIMEOUT: (15, 1440, 1, "min", True),
+    WIFI_INTO_DOD_TIMEOUT: (5, 1440, 1, "min", True),
 }
 
 # 只读项键名(sensor)
@@ -125,6 +125,109 @@ WIFI_SBMS6_HW_LIMITED_CHG_SOC_MAX = "wifi_sbms6_hw_limited_chg_soc_max"
 WIFI_SBMS7_HW_LIMITED_DISC_SOC_MIN = "wifi_sbms7_hw_limited_disc_soc_min"
 # 从机7BMS硬件限制充电最高SOC t955
 WIFI_SBMS7_HW_LIMITED_CHG_SOC_MAX = "wifi_sbms7_hw_limited_chg_soc_max"
+# 总输入功率 t33
+WIFI_INPUTPOWER_TOTAL = "wifi_inputpower_total"
+# 总输出功率 t34
+WIFI_OUTPUTPOWER_TOTAL = "wifi_outputpower_total"
+# 日累计发电量 t49
+WIFI_EEPC_DAY = "wifi_eepc_day"
+# 日输出电量 t66
+WIFI_OUTPUTENERGY_DAY = "wifi_outputenergy_day"
+# 日市电充电电量 t710
+WIFI_CP_AC_CHG_ENERGY_DAY = "wifi_cp_ac_chg_energy_day"
+# 市电输入功率 t711
+WIFI_CP_AC_INPUTPOWER = "wifi_cp_ac_inputpower"
+# 车充模式功率 t701_4
+WIFI_CAR_CHG_MODE_POWER = "wifi_car_chg_mode_power"
+# 家电模式功率 t702_4
+WIFI_HOME_MODE_POWER = "wifi_home_mode_power"
+# 主机PV1输入功率 t50
+WIFI_INPUTPOWER_PV1 = "wifi_inputpower_pv1"
+# 主机PV2输入功率 t62
+WIFI_INPUTPOWER_PV2 = "wifi_inputpower_pv2"
+# 从机1PV输入功率 t63
+WIFI_INPUTPOWER_PV3 = "wifi_inputpower_pv3"
+# 从机2PV输入功率 t64
+WIFI_INPUTPOWER_PV4 = "wifi_inputpower_pv4"
+# 从机3PV输入功率 t65
+WIFI_INPUTPOWER_PV5 = "wifi_inputpower_pv5"
+# 从机4PV输入功率 t812
+WIFI_INPUTPOWER_PV6 = "wifi_inputpower_pv6"
+# 从机5PV输入功率 t813
+WIFI_INPUTPOWER_PV7 = "wifi_inputpower_pv7"
+# 从机6PV输入功率 t814
+WIFI_INPUTPOWER_PV8 = "wifi_inputpower_pv8"
+# 从机7PV输入功率 t815
+WIFI_INPUTPOWER_PV9 = "wifi_inputpower_pv9"
+# 主机电芯最低温度 t220
+WIFI_B_CELLTEMP = "wifi_b_celltemp"
+# 从机1电芯最低温度 t233
+WIFI_B1_CELLTEMP = "wifi_b1_celltemp"
+# 从机2电芯最低温度 t246
+WIFI_B2_CELLTEMP = "wifi_b2_celltemp"
+# 从机3电芯最低温度 t259
+WIFI_B3_CELLTEMP = "wifi_b3_celltemp"
+# 从机4电芯最低温度 t836
+WIFI_B4_CELLTEMP = "wifi_b4_celltemp"
+# 从机5电芯最低温度 t849
+WIFI_B5_CELLTEMP = "wifi_b5_celltemp"
+# 从机6电芯最低温度 t862
+WIFI_B6_CELLTEMP = "wifi_b6_celltemp"
+# 从机7电芯最低温度 t875
+WIFI_B7_CELLTEMP = "wifi_b7_celltemp"
+# 主机加热状态 t586
+WIFI_B_HEATER_WORKING_STATUS = "wifi_b_heater_working_status"
+# 从机1加热状态 t586
+WIFI_B1_HEATER_WORKING_STATUS = "wifi_b1_heater_working_status"
+# 从机2加热状态 t586
+WIFI_B2_HEATER_WORKING_STATUS = "wifi_b2_heater_working_status"
+# 从机3加热状态 t586
+WIFI_B3_HEATER_WORKING_STATUS = "wifi_b3_heater_working_status"
+# 从机4加热状态 t586
+WIFI_B4_HEATER_WORKING_STATUS = "wifi_b4_heater_working_status"
+# 从机5加热状态 t586
+WIFI_B5_HEATER_WORKING_STATUS = "wifi_b5_heater_working_status"
+# 从机6加热状态 t586
+WIFI_B6_HEATER_WORKING_STATUS = "wifi_b6_heater_working_status"
+# 从机7加热状态 t586
+WIFI_B7_HEATER_WORKING_STATUS = "wifi_b7_heater_working_status"
+# 主机MPPT1输入电流 t537
+WIFI_MBMS_MPPT1_IN_I = "wifi_mbms_mppt1_in_i"
+# 主机MPPT1输入电压 t536
+WIFI_MBMS_MPPT1_IN_V = "wifi_mbms_mppt1_in_v"
+# 主机MPPT2输入电流 t545
+WIFI_MBMS_MPPT2_IN_I = "wifi_mbms_mppt2_in_i"
+# 主机MPPT2输入电压 t544
+WIFI_MBMS_MPPT2_IN_V = "wifi_mbms_mppt2_in_v"
+# 从机1MPPT输入电流 t553
+WIFI_SBMS1_MPPT_IN_I = "wifi_sbms1_mppt_in_i"
+# 从机1MPPT输入电压 t552
+WIFI_SBMS1_MPPT_IN_V = "wifi_sbms1_mppt_in_v"
+# 从机2MPPT输入电流 t561
+WIFI_SBMS2_MPPT_IN_I = "wifi_sbms2_mppt_in_i"
+# 从机2MPPT输入电压 t560
+WIFI_SBMS2_MPPT_IN_V = "wifi_sbms2_mppt_in_v"
+# 从机3MPPT输入电流 t569
+WIFI_SBMS3_MPPT_IN_I = "wifi_sbms3_mppt_in_i"
+# 从机3MPPT输入电压 t568
+WIFI_SBMS3_MPPT_IN_V = "wifi_sbms3_mppt_in_v"
+# 从机4MPPT输入电流 t970
+WIFI_SBMS4_MPPT_IN_I = "wifi_sbms4_mppt_in_i"
+# 从机4MPPT输入电压 t969
+WIFI_SBMS4_MPPT_IN_V = "wifi_sbms4_mppt_in_v"
+# 从机5MPPT输入电流 t978
+WIFI_SBMS5_MPPT_IN_I = "wifi_sbms5_mppt_in_i"
+# 从机5MPPT输入电压 t977
+WIFI_SBMS5_MPPT_IN_V = "wifi_sbms5_mppt_in_v"
+# 从机6MPPT输入电流 t986
+WIFI_SBMS6_MPPT_IN_I = "wifi_sbms6_mppt_in_i"
+# 从机6MPPT输入电压 t985
+WIFI_SBMS6_MPPT_IN_V = "wifi_sbms6_mppt_in_v"
+# 从机7MPPT输入电流 t994
+WIFI_SBMS7_MPPT_IN_I = "wifi_sbms7_mppt_in_i"
+# 从机7MPPT输入电压 t993
+WIFI_SBMS7_MPPT_IN_V = "wifi_sbms7_mppt_in_v"
+
 
 # SensorType显示类型映射
 ENTITY_SENSOR_TYPES = {
@@ -153,6 +256,137 @@ ENTITY_SENSOR_TYPES = {
     WIFI_SBMS6_HW_LIMITED_CHG_SOC_MAX: "t953",
     WIFI_SBMS7_HW_LIMITED_DISC_SOC_MIN: "t954",
     WIFI_SBMS7_HW_LIMITED_CHG_SOC_MAX: "t955",
+    WIFI_INPUTPOWER_TOTAL: "t33",
+    WIFI_OUTPUTPOWER_TOTAL: "t34",
+    WIFI_EEPC_DAY: "t49",
+    WIFI_OUTPUTENERGY_DAY: "t66",
+    WIFI_CP_AC_CHG_ENERGY_DAY: "t710",
+    WIFI_CP_AC_INPUTPOWER: "t711",
+    WIFI_CAR_CHG_MODE_POWER: "t701_4",
+    WIFI_HOME_MODE_POWER: "t702_4",
+    WIFI_INPUTPOWER_PV1: "t50",
+    WIFI_INPUTPOWER_PV2: "t62",
+    WIFI_INPUTPOWER_PV3: "t63",
+    WIFI_INPUTPOWER_PV4: "t64",
+    WIFI_INPUTPOWER_PV5: "t65",
+    WIFI_INPUTPOWER_PV6: "t812",
+    WIFI_INPUTPOWER_PV7: "t813",
+    WIFI_INPUTPOWER_PV8: "t814",
+    WIFI_INPUTPOWER_PV9: "t815",
+    WIFI_B_CELLTEMP: "t220",
+    WIFI_B1_CELLTEMP: "t233",
+    WIFI_B2_CELLTEMP: "t246",
+    WIFI_B3_CELLTEMP: "t259",
+    WIFI_B4_CELLTEMP: "t836",
+    WIFI_B5_CELLTEMP: "t849",
+    WIFI_B6_CELLTEMP: "t862",
+    WIFI_B7_CELLTEMP: "t875",
+    WIFI_B_HEATER_WORKING_STATUS: "t586",
+    WIFI_B1_HEATER_WORKING_STATUS: "t586",
+    WIFI_B2_HEATER_WORKING_STATUS: "t586",
+    WIFI_B3_HEATER_WORKING_STATUS: "t586",
+    WIFI_B4_HEATER_WORKING_STATUS: "t586",
+    WIFI_B5_HEATER_WORKING_STATUS: "t586",
+    WIFI_B6_HEATER_WORKING_STATUS: "t586",
+    WIFI_B7_HEATER_WORKING_STATUS: "t586",
+    WIFI_MBMS_MPPT1_IN_I: "t537",
+    WIFI_MBMS_MPPT1_IN_V: "t536",
+    WIFI_MBMS_MPPT2_IN_I: "t545",
+    WIFI_MBMS_MPPT2_IN_V: "t544",
+    WIFI_SBMS1_MPPT_IN_I: "t553",
+    WIFI_SBMS1_MPPT_IN_V: "t552",
+    WIFI_SBMS2_MPPT_IN_I: "t561",
+    WIFI_SBMS2_MPPT_IN_V: "t560",
+    WIFI_SBMS3_MPPT_IN_I: "t569",
+    WIFI_SBMS3_MPPT_IN_V: "t568",
+    WIFI_SBMS4_MPPT_IN_I: "t970",
+    WIFI_SBMS4_MPPT_IN_V: "t969",
+    WIFI_SBMS5_MPPT_IN_I: "t978",
+    WIFI_SBMS5_MPPT_IN_V: "t977",
+    WIFI_SBMS6_MPPT_IN_I: "t986",
+    WIFI_SBMS6_MPPT_IN_V: "t985",
+    WIFI_SBMS7_MPPT_IN_I: "t994",
+    WIFI_SBMS7_MPPT_IN_V: "t993",
+}
+
+# SensorValue显示初始状态
+ENTITY_SENSOR_VALUES = {
+    WIFI_SOC: ("%", "BATTERY", "1"),
+    WIFI_B_ACTUAL_SOC: ("%", "BATTERY", "1"),
+    WIFI_B1_ACTUAL_SOC: ("%", "BATTERY", "1"),
+    WIFI_B2_ACTUAL_SOC: ("%", "BATTERY", "1"),
+    WIFI_B3_ACTUAL_SOC: ("%", "BATTERY", "1"),
+    WIFI_B4_ACTUAL_SOC: ("%", "BATTERY", "1"),
+    WIFI_B5_ACTUAL_SOC: ("%", "BATTERY", "1"),
+    WIFI_B6_ACTUAL_SOC: ("%", "BATTERY", "1"),
+    WIFI_B7_ACTUAL_SOC: ("%", "BATTERY", "1"),
+    WIFI_MBMS_HW_LIMITED_DISC_SOC_MIN: ("%", "BATTERY", "1"),
+    WIFI_MBMS_HW_LIMITED_CHG_SOC_MAX: ("%", "BATTERY", "1"),
+    WIFI_SBMS1_HW_LIMITED_DISC_SOC_MIN: ("%", "BATTERY", "1"),
+    WIFI_SBMS1_HW_LIMITED_CHG_SOC_MAX: ("%", "BATTERY", "1"),
+    WIFI_SBMS2_HW_LIMITED_DISC_SOC_MIN: ("%", "BATTERY", "1"),
+    WIFI_SBMS2_HW_LIMITED_CHG_SOC_MAX: ("%", "BATTERY", "1"),
+    WIFI_SBMS3_HW_LIMITED_DISC_SOC_MIN: ("%", "BATTERY", "1"),
+    WIFI_SBMS3_HW_LIMITED_CHG_SOC_MAX: ("%", "BATTERY", "1"),
+    WIFI_SBMS4_HW_LIMITED_DISC_SOC_MIN: ("%", "BATTERY", "1"),
+    WIFI_SBMS4_HW_LIMITED_CHG_SOC_MAX: ("%", "BATTERY", "1"),
+    WIFI_SBMS5_HW_LIMITED_DISC_SOC_MIN: ("%", "BATTERY", "1"),
+    WIFI_SBMS5_HW_LIMITED_CHG_SOC_MAX: ("%", "BATTERY", "1"),
+    WIFI_SBMS6_HW_LIMITED_DISC_SOC_MIN: ("%", "BATTERY", "1"),
+    WIFI_SBMS6_HW_LIMITED_CHG_SOC_MAX: ("%", "BATTERY", "1"),
+    WIFI_SBMS7_HW_LIMITED_DISC_SOC_MIN: ("%", "BATTERY", "1"),
+    WIFI_SBMS7_HW_LIMITED_CHG_SOC_MAX: ("%", "BATTERY", "1"),
+    WIFI_INPUTPOWER_TOTAL: ("W", "POWER", "1"),
+    WIFI_OUTPUTPOWER_TOTAL: ("W", "POWER", "1"),
+    WIFI_EEPC_DAY: ("kWh", "ENERGY", "0.001"),
+    WIFI_OUTPUTENERGY_DAY: ("kWh", "ENERGY", "0.001"),
+    WIFI_CP_AC_CHG_ENERGY_DAY: ("kWh", "ENERGY", "0.001"),
+    WIFI_CP_AC_INPUTPOWER: ("W", "POWER", "1"),
+    WIFI_CAR_CHG_MODE_POWER: ("W", "POWER", "1"),
+    WIFI_HOME_MODE_POWER: ("W", "POWER", "1"),
+    WIFI_INPUTPOWER_PV1: ("W", "POWER", "0.01"),
+    WIFI_INPUTPOWER_PV2: ("W", "POWER", "0.01"),
+    WIFI_INPUTPOWER_PV3: ("W", "POWER", "0.01"),
+    WIFI_INPUTPOWER_PV4: ("W", "POWER", "0.01"),
+    WIFI_INPUTPOWER_PV5: ("W", "POWER", "0.01"),
+    WIFI_INPUTPOWER_PV6: ("W", "POWER", "0.01"),
+    WIFI_INPUTPOWER_PV7: ("W", "POWER", "0.01"),
+    WIFI_INPUTPOWER_PV8: ("W", "POWER", "0.01"),
+    WIFI_INPUTPOWER_PV9: ("W", "POWER", "0.01"),
+    WIFI_B_CELLTEMP: ("°C", "TEMPERATURE", "TEMP273"),
+    WIFI_B1_CELLTEMP: ("°C", "TEMPERATURE", "TEMP273"),
+    WIFI_B2_CELLTEMP: ("°C", "TEMPERATURE", "TEMP273"),
+    WIFI_B3_CELLTEMP: ("°C", "TEMPERATURE", "TEMP273"),
+    WIFI_B4_CELLTEMP: ("°C", "TEMPERATURE", "TEMP273"),
+    WIFI_B5_CELLTEMP: ("°C", "TEMPERATURE", "TEMP273"),
+    WIFI_B6_CELLTEMP: ("°C", "TEMPERATURE", "TEMP273"),
+    WIFI_B7_CELLTEMP: ("°C", "TEMPERATURE", "TEMP273"),
+    WIFI_B_HEATER_WORKING_STATUS: ("", "ENUM", "BIT0"),
+    WIFI_B1_HEATER_WORKING_STATUS: ("", "ENUM", "BIT1"),
+    WIFI_B2_HEATER_WORKING_STATUS: ("", "ENUM", "BIT2"),
+    WIFI_B3_HEATER_WORKING_STATUS: ("", "ENUM", "BIT3"),
+    WIFI_B4_HEATER_WORKING_STATUS: ("", "ENUM", "BIT4"),
+    WIFI_B5_HEATER_WORKING_STATUS: ("", "ENUM", "BIT5"),
+    WIFI_B6_HEATER_WORKING_STATUS: ("", "ENUM", "BIT6"),
+    WIFI_B7_HEATER_WORKING_STATUS: ("", "ENUM", "BIT7"),
+    WIFI_MBMS_MPPT1_IN_I: ("A", "CURRENT", "0.1"),
+    WIFI_MBMS_MPPT1_IN_V: ("V", "VOLTAGE", "0.1"),
+    WIFI_MBMS_MPPT2_IN_I: ("A", "CURRENT", "0.1"),
+    WIFI_MBMS_MPPT2_IN_V: ("V", "VOLTAGE", "0.1"),
+    WIFI_SBMS1_MPPT_IN_I: ("A", "CURRENT", "0.1"),
+    WIFI_SBMS1_MPPT_IN_V: ("V", "VOLTAGE", "0.1"),
+    WIFI_SBMS2_MPPT_IN_I: ("A", "CURRENT", "0.1"),
+    WIFI_SBMS2_MPPT_IN_V: ("V", "VOLTAGE", "0.1"),
+    WIFI_SBMS3_MPPT_IN_I: ("A", "CURRENT", "0.1"),
+    WIFI_SBMS3_MPPT_IN_V: ("V", "VOLTAGE", "0.1"),
+    WIFI_SBMS4_MPPT_IN_I: ("A", "CURRENT", "0.1"),
+    WIFI_SBMS4_MPPT_IN_V: ("V", "VOLTAGE", "0.1"),
+    WIFI_SBMS5_MPPT_IN_I: ("A", "CURRENT", "0.1"),
+    WIFI_SBMS5_MPPT_IN_V: ("V", "VOLTAGE", "0.1"),
+    WIFI_SBMS6_MPPT_IN_I: ("A", "CURRENT", "0.1"),
+    WIFI_SBMS6_MPPT_IN_V: ("V", "VOLTAGE", "0.1"),
+    WIFI_SBMS7_MPPT_IN_I: ("A", "CURRENT", "0.1"),
+    WIFI_SBMS7_MPPT_IN_V: ("V", "VOLTAGE", "0.1"),
 }
 
 # 只读项键名(sensor)
@@ -160,9 +394,19 @@ ENTITY_SENSOR_TYPES = {
 WIFI_CONNECTION = "wifi_connection"
 # 上一次刷新时间
 WIFI_REPORT_TIME = "wifi_update_time"
+# 网络信号强度 t475
+WIFI_WIRELESS_NETWORK_RSSI = "wifi_wireless_network_rssi"
 
-# diagnosticType显示类型映
+# DiagnosticType显示类型映
 ENTITY_DIAGNOSTIC_TYPES = {
     WIFI_CONNECTION: "connection",
     WIFI_REPORT_TIME: "reporttime",
+    WIFI_WIRELESS_NETWORK_RSSI: "networkrssi",
+}
+
+# DiagnosticValue初始化值
+ENTITY_DIAGNOSTIC_VALUES = {
+    WIFI_CONNECTION: ("disconnected"),
+    WIFI_REPORT_TIME: ("2000.01.01 00:00:00"),
+    WIFI_WIRELESS_NETWORK_RSSI: ("0 dB"),
 }
