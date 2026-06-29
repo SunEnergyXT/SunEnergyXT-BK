@@ -221,6 +221,14 @@ def get_device_class(device_type: str) -> str | None:
     return device_mapping.get(device_type)
 
 
+def get_entity_device_class(sensor_id, device_type: str) -> str | None:
+    """根据实体类型获取设备类型."""
+    if sensor_id in HW_LIMIT_SENSOR_IDS:
+        return None
+
+    return get_device_class(device_type)
+
+
 def get_data_value(data, data_factor) -> Any | None:
     """根据符号获取设备类型."""
 
@@ -289,13 +297,12 @@ def get_entity_available(data_type, data_info, data_factor) -> bool:
 def get_entity_state_class(sensor_id) -> str | None:
     """根据实体类型获取state_class."""
 
-    state_class = "measurement"
-
     data_type = ENTITY_SENSOR_TYPES[sensor_id]
 
-    if data_type == "t586":
-        state_class = None
-    else:
-        state_class = "measurement"
+    if data_type == "t586" or sensor_id in HW_LIMIT_SENSOR_IDS:
+        return None
 
-    return state_class
+    if data_type in {"t49", "t66", "t710"}:
+        return "total_increasing"
+
+    return "measurement"

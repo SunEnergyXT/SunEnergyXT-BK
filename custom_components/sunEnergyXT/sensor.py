@@ -23,7 +23,7 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
 
         data_unit = get_data_unit(unit_type)
 
-        device_class = get_device_class(device_type)
+        device_class = get_entity_device_class(sensor_id, device_type)
 
         entities.append(
             BatterySensorEntity(
@@ -162,6 +162,9 @@ class BatteryDiagnosticEntity(SensorEntity):
         self._attr_has_entity_name = True
         self._attr_translation_key = sensor_id
         self._attr_device_info = GLOBAL_EQUIP_INFOS[config_entry.entry_id]
+
+        if sensor_id == WIFI_REPORT_TIME:
+            self._attr_entity_registry_enabled_default = False
 
     @property
     def state(self):
