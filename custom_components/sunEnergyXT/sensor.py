@@ -1,5 +1,15 @@
 import logging
-from homeassistant.components.sensor import EntityCategory, SensorEntity
+
+from awesomeversion import AwesomeVersion
+from homeassistant.const import __version__ as HA_VERSION
+
+if AwesomeVersion(HA_VERSION) >= AwesomeVersion("2026.11.0"):
+    from homeassistant.const import EntityCategory
+else:
+    from homeassistant.components.sensor import EntityCategory
+
+from homeassistant.components.sensor import SensorEntity
+
 from homeassistant.core import callback
 from homeassistant.helpers.dispatcher import async_dispatcher_connect
 from .const import *
