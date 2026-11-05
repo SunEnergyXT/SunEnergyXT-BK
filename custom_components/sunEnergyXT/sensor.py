@@ -1,5 +1,11 @@
 import logging
-from homeassistant.components.sensor import EntityCategory, SensorEntity
+from homeassistant.components.sensor import SensorEntity
+
+try:
+    from homeassistant.const import EntityCategory
+except ImportError:
+    # Home Assistant before 2023.3 only provides it in helpers.entity
+    from homeassistant.helpers.entity import EntityCategory
 from homeassistant.core import callback
 from homeassistant.helpers.dispatcher import async_dispatcher_connect
 from .const import *
