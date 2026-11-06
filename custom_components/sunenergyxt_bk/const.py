@@ -1,6 +1,6 @@
 """全局常量."""
 
-DOMAIN = "sunEnergyXT"
+DOMAIN = "sunenergyxt_bk"
 
 # 配置项键名(switch)
 # 电池系统切换本地模式开关 t598

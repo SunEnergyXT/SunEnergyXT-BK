@@ -1,5 +1,5 @@
 {
-  "domain": "sunEnergyXT",
+  "domain": "sunenergyxt_bk",
   "name": "SunEnergyXT-BK",
   "codeowners": ["@xlk"],
   "config_flow": true,
@@ -11,5 +11,5 @@
   "dependencies": ["network", "dhcp","zeroconf"],
   "requirements": ["propcache", "aiofiles", "pyyaml"],
   "translations": ["translations"],
-  "version": "26.11.05"
+  "version": "26.11.06"
 }
