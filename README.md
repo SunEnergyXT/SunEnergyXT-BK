@@ -37,6 +37,11 @@ upgrade once as follows.
 
 ### Home Assistant 2026.11 and later
 
+If the marketplace still offers 1.0.3 as the newest version, restart Home
+Assistant or select `Refresh information` in the menu of SunEnergyXT-BK first.
+The marketplace checks installed repositories only at startup and every 48
+hours.
+
 1. In the marketplace, open SunEnergyXT-BK and select `Uninstall`. When it
    reports that SunEnergyXT-BK is in use, select `Delete and uninstall`, this
    also deletes the configured devices.
@@ -47,6 +52,9 @@ upgrade once as follows.
 4. Add the devices again with the same serial numbers.
 
 ### Home Assistant before 2026.11
+
+If HACS does not offer 1.0.4 yet, restart Home Assistant or select
+`Update information` for SunEnergyXT-BK in HACS first.
 
 1. Go to `Settings > Devices & services > SunEnergyXT-BK` and delete every
    configured device.
