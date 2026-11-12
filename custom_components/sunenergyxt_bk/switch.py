@@ -175,8 +175,7 @@ class BatterySwitchEntity(SwitchEntity, RestoreEntity):
 
                 self.sync_update_value(False)
         except Exception as e:
-            message = "async_turn_on: %s", e
-            _LOGGER.error(message)
+            _LOGGER.error("async_turn_on: %s", e)
         finally:
             # 操作的时候不给刷新页面值
             self._operate = False
@@ -222,8 +221,7 @@ class BatterySwitchEntity(SwitchEntity, RestoreEntity):
                 self.sync_update_value(True)
 
         except Exception as e:
-            message = "async_turn_off: %s", e
-            _LOGGER.error(message)
+            _LOGGER.error("async_turn_off: %s", e)
         finally:
             # 操作的时候不给刷新页面值
             self._operate = False

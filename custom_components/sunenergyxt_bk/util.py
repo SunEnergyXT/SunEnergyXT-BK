@@ -1,7 +1,18 @@
 import socket
 import voluptuous as vol
 from homeassistant.components.sensor.const import SensorDeviceClass
-from homeassistant.const import *
+# 不能用 import *，会逐个访问 HA 已弃用的常量，每次加载都刷弃用警告
+from homeassistant.const import (
+    PERCENTAGE,
+    SIGNAL_STRENGTH_DECIBELS,
+    SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
+    UnitOfElectricCurrent,
+    UnitOfElectricPotential,
+    UnitOfEnergy,
+    UnitOfPower,
+    UnitOfTemperature,
+    UnitOfTime,
+)
 from .global_config import *
 from typing import Any
 from .const import *

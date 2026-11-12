@@ -72,9 +72,7 @@ class MdnsManager:
                 return None
 
             if not addresses:
-                message = "service %s has no valid addresses", service_name
-
-                _LOGGER.info(message)
+                _LOGGER.info("service %s has no valid addresses", service_name)
 
                 return None
 
@@ -116,8 +114,7 @@ class MdnsManager:
             )
 
         except Exception as e:
-            message = "error handling parse info: %s", e
-            _LOGGER.error(message)
+            _LOGGER.error("error handling parse info: %s", e)
 
         return None
 
@@ -146,8 +143,7 @@ class MdnsManager:
             _LOGGER.info(message)
 
         except Exception as e:
-            message = "error handling service add: %s", e
-            _LOGGER.error(message)
+            _LOGGER.error("error handling service add: %s", e)
 
     async def async_handle_service_update(self, info):
         """mdns发现更新函数."""
@@ -174,8 +170,7 @@ class MdnsManager:
             _LOGGER.info(message)
 
         except Exception as e:
-            message = "error handling service update: %s", e
-            _LOGGER.error(message)
+            _LOGGER.error("error handling service update: %s", e)
 
     async def async_handle_judge_change(self, entry_info, device_info) -> bool:
         """mdns判断配置是否更新函数."""
@@ -233,9 +228,7 @@ class MdnsManager:
 
             del GLOBAL_DEVICES[unique_id]
 
-            message = "removed device sn: %s", unique_id
-
-            _LOGGER.info(message)
+            _LOGGER.info("removed device sn: %s", unique_id)
 
             # keys_list = list(self.hass.data[DOMAIN].keys())
             # # 通知Home Assistant设备已移除
@@ -243,8 +236,7 @@ class MdnsManager:
             #     self.hass.config_entries.async_reload(keys_list[1])
             # )
         except Exception as e:
-            message = "error handling service remove: %s", e
-            _LOGGER.error(message)
+            _LOGGER.error("error handling service remove: %s", e)
 
 
 class MdnsServiceListener(ServiceListener):
@@ -295,8 +287,7 @@ class MdnsServiceListener(ServiceListener):
             await self.mdns_manager.async_handle_service_add(info)
 
         except Exception as e:
-            message = ("error handling service add: %s", e)
-            _LOGGER.error(message)
+            _LOGGER.error("error handling service add: %s", e)
 
     async def async_handle_service_remove(self, aiozc_zero, service_type, service_name):
         """mdns异步处理服务删除函数."""
@@ -304,8 +295,7 @@ class MdnsServiceListener(ServiceListener):
             await self.mdns_manager.async_handle_service_remove(service_name)
 
         except Exception as e:
-            message = ("error handling service remove: %s", e)
-            _LOGGER.error(message)
+            _LOGGER.error("error handling service remove: %s", e)
 
     async def async_handle_service_update(self, aiozc_zero, service_type, service_name):
         """mdns异步处理服务更新函数."""
@@ -318,5 +308,4 @@ class MdnsServiceListener(ServiceListener):
             await self.mdns_manager.async_handle_service_update(info)
 
         except Exception as e:
-            message = ("error handling service update: %s", e)
-            _LOGGER.error(message)
+            _LOGGER.error("error handling service update: %s", e)

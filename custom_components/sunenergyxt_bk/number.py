@@ -197,8 +197,7 @@ class BatteryNumberEntity(NumberEntity, RestoreEntity):
                 self.sync_update_value(last_value)
 
         except Exception as e:
-            message = "async_set_native_value: %s", e
-            _LOGGER.error(message)
+            _LOGGER.error("async_set_native_value: %s", e)
         finally:
             # 操作的时候不给刷新页面值
             self._operate = False

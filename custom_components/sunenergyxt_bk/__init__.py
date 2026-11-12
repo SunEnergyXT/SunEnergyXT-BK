@@ -61,9 +61,7 @@ async def async_reload_entry(hass: HomeAssistant, entry: ConfigEntry) -> None:
 
     await async_setup_entry(hass, entry)
 
-    message = "async_reload_entry: %s", entry.data.get("device_name")
-
-    _LOGGER.info(message)
+    _LOGGER.info("async_reload_entry: %s", entry.data.get("device_name"))
 
 
 async def async_remove_device(hass: HomeAssistant, entry):
@@ -84,13 +82,10 @@ async def async_remove_device(hass: HomeAssistant, entry):
 
         del GLOBAL_DEVICES[unique_id]
 
-        message = "removed device: %s", serial_number
-
-        _LOGGER.info(message)
+        _LOGGER.info("removed device: %s", serial_number)
 
     except Exception as e:
-        message = "async_remove_device error: %s", e
-        _LOGGER.error(message)
+        _LOGGER.error("async_remove_device error: %s", e)
 
 
 async def async_create_equip_info(hass: HomeAssistant, entry):

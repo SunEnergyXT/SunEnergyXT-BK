@@ -27,6 +27,8 @@ class TcpClient:
         self.connected = False
         self.checked = False
         self.delay = 5
+        # 本轮离线是否已记过警告，连上后复位；设备离线期间每 delay 秒重连一次，只在首次失败告警
+        self.offline_logged = False
         self.data = queue.Queue()  # 存储从服务器接收的数据
         self.last_time = datetime.now()
 
@@ -67,13 +69,26 @@ class TcpClient:
                 self.async_listen_data(), name="tcp_listen_data_task"
             )
 
-            message = f"connect to{self.host}:{self.port}"
+            _LOGGER.info("connected to %s:%s", self.host, self.port)
 
-            _LOGGER.info(message)
+            self.offline_logged = False
 
         except Exception as e:
-            message = f"connect to {self.host} {self.port}" + ":  %s", e
-            _LOGGER.error(message)
+            # TimeoutError 等异常的 str 为空，用 %r 才能看出异常类型
+            if self.offline_logged:
+                _LOGGER.debug(
+                    "connect to %s:%s failed: %r", self.host, self.port, e
+                )
+            else:
+                _LOGGER.warning(
+                    "cannot connect to battery at %s:%s (%r), will keep retrying. "
+                    "Check that local mode is enabled on the battery and that "
+                    "Home Assistant and the battery are on the same network",
+                    self.host,
+                    self.port,
+                    e,
+                )
+                self.offline_logged = True
             await self.async_disconnect()
 
     async def async_disconnect(self):
@@ -92,8 +107,7 @@ class TcpClient:
             except (asyncio.CancelledError, TimeoutError):
                 pass  # 需要捕获取消错误,无法转化为异常
             except Exception as e:
-                message = "async_disconnect_isten_data_task_error: %s", e
-                _LOGGER.error(message)
+                _LOGGER.error("async_disconnect_isten_data_task_error: %s", e)
             finally:
                 self.listen_data_task = None
 
@@ -104,8 +118,7 @@ class TcpClient:
 
                 await asyncio.wait_for(self.writer.wait_closed(), timeout=self.delay)
             except (TimeoutError, Exception) as e:
-                message = "async_disconnect_writer_error: %s", e
-                _LOGGER.error(message)
+                _LOGGER.error("async_disconnect_writer_error: %s", e)
             finally:
                 self.writer = None
                 self.reader = None
@@ -129,8 +142,7 @@ class TcpClient:
 
             await self.writer.drain()
         except Exception as e:
-            message = "async_send_data_error: %s", e
-            _LOGGER.error(message)
+            _LOGGER.error("async_send_data_error: %s", e)
             await self.async_reconnect()
             return False
 
@@ -174,8 +186,7 @@ class TcpClient:
                             return True
 
             except Exception as e:
-                message = "async_set_data_error: %s", e
-                _LOGGER.error(message)
+                _LOGGER.error("async_set_data_error: %s", e)
 
             await asyncio.sleep(0.1)
 
@@ -246,8 +257,7 @@ class TcpClient:
                     self.last_time = datetime.now()
 
             except Exception as e:
-                message = "async_listen_data_error: %s", e
-                _LOGGER.error(message)
+                _LOGGER.error("async_listen_data_error: %s", e)
                 self.connected = False
                 break
 
@@ -278,8 +288,7 @@ class TcpClient:
                 await self.async_connect()
 
             except Exception as e:
-                message = "async_check_connect_error: %s", e
-                _LOGGER.error(message)
+                _LOGGER.error("async_check_connect_error: %s", e)
                 self.connected = False
 
     async def async_update_entities(self, data):
@@ -353,8 +362,7 @@ class TcpClient:
             except (asyncio.CancelledError, TimeoutError):
                 pass  # 需要捕获取消错误,无法转化为异常
             except Exception as e:
-                message = "async_stop_client_error: %s", e
-                _LOGGER.error(message)
+                _LOGGER.error("async_stop_client_error: %s", e)
             finally:
                 self.check_connect_task = None
 
@@ -363,6 +371,5 @@ class TcpClient:
         try:
             return RespondInfo.json_to_respond(data)
         except Exception as e:
-            message = "async_listen_prase_data_error: %s", e
-            _LOGGER.error(message)
+            _LOGGER.error("async_listen_prase_data_error: %s", e)
             return None
